@@ -147,12 +147,12 @@ class Youngagrarians.Collections.LocationsCollection extends Backbone.Collection
             bio = m.get("bioregion")
             match = @bioregion.match bio
 
-            if bio.length > 0 and !_.isNull( match )
+            if !_.isNull( bio ) and bio.length > 0 and !_.isNull( match )
               goodToShow = goodToShow && true
             else
               goodToShow = false
 
-          if @show.length > 0
+          if !_.isNull( @show ) and @show.length > 0
             provinceSelected = $("select#provinces").prop 'selectedIndex'
             bioregionSelected = $("select#bioregions").prop 'selectedIndex'
             categorySelected = $("select#category").prop 'selectedIndex'
