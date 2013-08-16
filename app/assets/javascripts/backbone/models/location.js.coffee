@@ -145,7 +145,7 @@ class Youngagrarians.Collections.LocationsCollection extends Backbone.Collection
 
           if !_.isNull @bioregion
             bio = m.get('bioregion')
-            if !_.isNull( bio )
+            if !_.isNull( bio ) or bio != ''
               bio = m.get("bioregion").split('-')
             else
               bio = []
