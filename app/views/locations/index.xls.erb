@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+	xmlns:o="urn:schemas-microsoft-com:office:office"
+	xmlns:x="urn:schemas-microsoft-com:office:excel"
+	xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+	xmlns:html="http://www.w3.org/TR/REC-html40">
+	<Worksheet ss:Name="Sheet1">
+		<Table>
+			<Row>
+				<Cell><Data ss:Type="String">Name</Data></Cell>
+				<Cell><Data ss:Type="String">Address</Data></Cell>
+				<Cell><Data ss:Type="String">Postal Code</Data></Cell>
+				<Cell><Data ss:Type="String">Description</Data></Cell>
+				<Cell><Data ss:Type="String">Bioregion</Data></Cell>
+				<Cell><Data ss:Type="String">Category</Data></Cell>
+				<Cell><Data ss:Type="String">Subcategories</Data></Cell>
+				<Cell><Data ss:Type="String">Email</Data></Cell>
+				<Cell><Data ss:Type="String">Phone</Data></Cell>
+				<Cell><Data ss:Type="String">URL</Data></Cell>
+				<Cell><Data ss:Type="String">Facebook URL</Data></Cell>
+				<Cell><Data ss:Type="String">Twitter URL</Data></Cell>
+				<Cell><Data ss:Type="String">Is Approved</Data></Cell>
+				<Cell><Data ss:Type="String">Resource Type</Data></Cell>
+				<Cell><Data ss:Type="String">Longitude</Data></Cell>
+				<Cell><Data ss:Type="String">Latitude</Data></Cell>
+				<Cell><Data ss:Type="String">Show Until</Data></Cell>
+			</Row>
+		<% @locations.each do |location| %>
+			<Row>
+				<Cell><Data ss:Type="String"><%= location.name %></Data></Cell>
+				<Cell><Data ss:Type="String"><%= location.address %></Data></Cell>
+				<Cell><Data ss:Type="String"><%= location.postal %></Data></Cell>
+				<Cell><Data ss:Type="String"><%= location.description %></Data></Cell>
+				<Cell><Data ss:Type="String"><%= location.bioregion %></Data></Cell>
+				<Cell><Data ss:Type="String"><%= location.category.name %></Data></Cell>
+				<Cell><Data ss:Type="String"><%= location.subcategory.map{ |sc| sc.name }.join(",") %></Data></Cell>
+				<Cell><Data ss:Type="String"><%= location.email %></Data></Cell>
+				<Cell><Data ss:Type="String"><%= location.phone %></Data></Cell>
+				<Cell><Data ss:Type="String"><%= location.url %></Data></Cell>
+				<Cell><Data ss:Type="String"><%= location.fb_url %></Data></Cell>
+				<Cell><Data ss:Type="String"><%= location.twitter_url %></Data></Cell>
+				<Cell><Data ss:Type="String"><%= location.is_approved %></Data></Cell>
+				<Cell><Data ss:Type="String"><%= location.resource_type %></Data></Cell>
+				<Cell><Data ss:Type="Number"><%= location.longitude %></Data></Cell>
+				<Cell><Data ss:Type="Number"><%= location.latitude %></Data></Cell>
+				<Cell><Data ss:Type="String"><%= location.show_until %></Data></Cell>
+			</Row>
+		<% end %>
+		</Table>
+	</Worksheet>
+</Workbook>

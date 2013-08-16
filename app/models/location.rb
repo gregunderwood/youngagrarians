@@ -22,6 +22,15 @@ class Location < ActiveRecord::Base
     super :include => [ :category, :subcategory ], :except => [ :category_id, :is_approved ]
   end
 
+  def self.to_csv(options = {})
+    CSV.generate(options) do |csv|
+      csv << column_names
+      all.each do |location|
+        csv << location.attributes.values_at(*column_names)
+      end
+    end
+  end
+
   def self.search(term, province = nil)
     result = []
     if not term.nil? and not term.empty?

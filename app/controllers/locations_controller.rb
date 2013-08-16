@@ -1,3 +1,4 @@
+require 'csv'
 class LocationsController < ApplicationController
   require 'spreadsheet'
   require 'fileutils'
@@ -23,6 +24,12 @@ class LocationsController < ApplicationController
   def index
     @categories = Category.all
     respond_to do |format|
+      format.csv {
+        send_data Location.to_csv
+      }
+      format.xls {
+        @locations = Location.all
+      }
       format.html {
         if not authenticated?
           redirect_to :root
