@@ -144,10 +144,14 @@ class Youngagrarians.Collections.LocationsCollection extends Backbone.Collection
               goodToShow = goodToShow && ( countryMatch || altMatch )
 
           if !_.isNull @bioregion
-            bio = m.get("bioregion")
-            match = @bioregion.match bio
+            bio = m.get("bioregion").split('-')
+            matches = []
+            _( bio ).each (part) =>
+              temp = @bioregion.match part
+              if !_.isNull temp and temp[0] != ""
+                matches.push temp[0]
 
-            if !_.isNull( bio ) and bio.length > 0 and !_.isNull( match )
+            if !_.isNull( bio ) and bio.length > 0 and matches.length > 0
               goodToShow = goodToShow && true
             else
               goodToShow = false
@@ -164,7 +168,8 @@ class Youngagrarians.Collections.LocationsCollection extends Backbone.Collection
           if @isEmpty( @category )
             goodToShow = false
 
-          m.marker.setVisible goodToShow
+          if !_.isUndefined m.marker
+            m.marker.setVisible goodToShow
           m.set markerVisible: goodToShow
 
     if data.type == 'zoom' or data.type == 'dragend'
@@ -174,9 +179,6 @@ class Youngagrarians.Collections.LocationsCollection extends Backbone.Collection
         if !_.isUndefined(location) and !_.isNull(location)
           isVisible = location.get 'markerVisible'
           location.set 'markerVisible', ( isVisible && $.goMap.isVisible(location) )
-
-    if data.type == 'filter'
-      console.log 'filtering?'
 
     if data.type == 'show'
       $.goMap.setMap

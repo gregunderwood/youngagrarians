@@ -78,9 +78,10 @@ class Youngagrarians.Views.MapMarker extends Backbone.Marionette.ItemView
                   caption: 'A location on the YoungAgrarians Resource Map'
                   description: _model.get("description")
                 }
-
+                ###
                 FB.ui data, (response) ->
                   console.log 'response: ', response
+                ###
 
             _.delay func, 200
             window.infoBubble = _infoBub

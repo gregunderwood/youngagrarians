@@ -51,7 +51,6 @@ class Youngagrarians.Views.ResultItem extends Backbone.Marionette.ItemView
       @$el.hide()
 
   changeShow: (model) =>
-    console.log 'marker visible: ', @model.get 'markerVisible'
     if @model.get 'markerVisible'
       if $.goMap.isVisible @model
         @$el.show()
