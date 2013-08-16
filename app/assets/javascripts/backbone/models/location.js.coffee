@@ -144,7 +144,11 @@ class Youngagrarians.Collections.LocationsCollection extends Backbone.Collection
               goodToShow = goodToShow && ( countryMatch || altMatch )
 
           if !_.isNull @bioregion
-            bio = m.get("bioregion").split('-')
+            bio = m.get('bioregion')
+            if !_.isNull( bio )
+              bio = m.get("bioregion").split('-')
+            else
+              bio = []
             matches = []
             _( bio ).each (part) =>
               temp = @bioregion.match part
