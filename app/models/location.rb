@@ -35,15 +35,15 @@ class Location < ActiveRecord::Base
     result = []
     if not term.nil? and not term.empty?
 
-      category = Category.find_by_name term
-      subcategory = Category.find_by_name term
+      category = Category.find( :first, :conditions => ["name like ?", "%#{term}%" ] )
+      subcategory = Subcategory.find( :first, :conditions => ["name like ?", "%#{term}%" ] )
 
       if not category.nil?
         result = result + Location.find( :all, :conditions => ["category_id = ?", category.id] )
       end
 
       if not subcategory.nil?
-        result = result + Location.all( :include => :subcategory, :conditions => ["subcategories.id = ?", subcategory.id ])
+        result = result + Location.all( :include => :subcategory, :conditions => ["subcategories.id = ?", subcategory.first.id ])
       end
 
       interested_fields = ["address", "name", "postal", "content","bioregion","phone","url","fb_url","twitter_url","description"]
@@ -65,12 +65,11 @@ class Location < ActiveRecord::Base
       }
 
       interested_fields.each do |i|
-        #result = result + Location.where( i.to_sym => /^#{term}/i )
         if province.nil?
-          result = result + Location.find( :all, :conditions => ["is_approved = 1 AND #{i} LIKE ? AND show_until < ?", "%#{term}%", Date.today])
+          result = result + Location.find( :all, :conditions => ["is_approved = 1 AND #{i} LIKE ? AND ( show_until < ? or show_until is null )", "%#{term}%", Date.today])
         else
           abbrev = provinces[province]
-          result = result + Location.find( :all, :conditions => ["is_approved = 1 AND #{i} LIKE ? AND ( address LIKE ? OR address LIKE ? ) AND show_until > ?", "%#{term}%", "%#{abbrev}%", "%#{province}%", Date.today])
+          result = result + Location.find( :all, :conditions => ["is_approved = 1 AND #{i} LIKE ? AND ( address LIKE ? OR address LIKE ? ) AND ( show_until > ? or show_until is null )", "%#{term}%", "%#{abbrev}%", "%#{province}%", Date.today])
         end
 
 

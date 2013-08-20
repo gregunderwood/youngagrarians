@@ -24,7 +24,7 @@ class Youngagrarians.Views.Map extends Backbone.Marionette.CompositeView
       'vancouver-island-coast':
         zoomCenter: '49.75288,-126.079102'
         zoomLevel: 7
-      'caribo-prince-george':
+      'cariboo-prince-george':
         zoomCenter: '52.816043,-121.179199'
         zoomLevel: 7
       'thompson-okanagan':
@@ -110,12 +110,14 @@ class Youngagrarians.Views.Map extends Backbone.Marionette.CompositeView
       'location-'+id
 
     showLocations = () =>
-      $.goMap.fitBounds('markers', locations )
-      if locations.length <= 1
-        $.goMap.setMap
-          zoom: 10
-      @collection.setShow ids
-
+      if locations.length > 0
+        $.goMap.fitBounds('markers', locations )
+        if locations.length <= 1
+          $.goMap.setMap
+            zoom: 10
+        @collection.setShow ids
+      else
+        @app.vent.trigger "search:nothing"
     _.delay showLocations, 100
 
   doSearch: (e) =>
@@ -152,6 +154,7 @@ class Youngagrarians.Views.Map extends Backbone.Marionette.CompositeView
     if !_.isNull( @bioregion )
       provinceSelector = @province.toLowerCase()
       bioregionSelector = @bioregion.toLowerCase().replace ' ', '-'
+      console.log 'bioregion selector: ', bioregionSelector
       center = @bioregionAreas[ provinceSelector ][ bioregionSelector ][ 'zoomCenter' ]
       zoom = @bioregionAreas[ provinceSelector ][ bioregionSelector ][ 'zoomLevel' ]
 
