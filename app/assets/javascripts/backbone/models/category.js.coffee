@@ -15,6 +15,10 @@ class Youngagrarians.Models.Category extends Backbone.RelationalModel
       includeInJSON: '_id'
   ]
 
+  isHidden: =>
+    #warning: hack, attribute in model would be better
+    return @get('name') == 'Web Resource'
+
   getIcon: =>
     return '/~youngagr/map/assets/map-icons/' + @get('name').toLowerCase().replace(' ', '-') + ".png"
 

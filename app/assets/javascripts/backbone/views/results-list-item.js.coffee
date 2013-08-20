@@ -56,5 +56,8 @@ class Youngagrarians.Views.ResultItem extends Backbone.Marionette.ItemView
         @$el.show()
       else
         @$el.hide()
+
+      if @model.get('category').isHidden() and @model.get 'markerVisible'
+        @$el.show()
     else
       @$el.hide()

@@ -112,9 +112,8 @@ class Youngagrarians.Collections.LocationsCollection extends Backbone.Collection
       @province = data.data.province
 
     if data.type == 'update'
-      _(markers).each (latlng,i) =>
-        id = ids[i].replace "location-", ""
-        m = @get id
+      @each (m) =>
+
         if !_.isUndefined(m) and !_.isNull(m)
           goodToShow = true
 
@@ -172,9 +171,14 @@ class Youngagrarians.Collections.LocationsCollection extends Backbone.Collection
           if @isEmpty( @category )
             goodToShow = false
 
+          if m.get('category').isHidden()
+            goodToShow = true
+
           if !_.isUndefined m.marker
             m.marker.setVisible goodToShow
+
           m.set markerVisible: goodToShow
+          return true
 
     if data.type == 'zoom' or data.type == 'dragend'
       _(markers).each (latlng, i) =>
