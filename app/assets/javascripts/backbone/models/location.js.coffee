@@ -172,7 +172,7 @@ class Youngagrarians.Collections.LocationsCollection extends Backbone.Collection
             goodToShow = false
 
           if m.get('category').isHidden()
-            goodToShow = true
+            goodToShow = goodToShow && true
 
           if !_.isUndefined m.marker
             m.marker.setVisible goodToShow
