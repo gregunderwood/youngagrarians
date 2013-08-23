@@ -41,7 +41,9 @@ class Youngagrarians.Models.Location extends Backbone.RelationalModel
     typeGood = @get('resource_type') == 'Web'
     catMatch = @get('category').id == category_id
 
-    show = hiddenCat and typeGood and catMatch
+    show = false
+    if @get('category').id == category_id and ( @get('resource_type') == 'Web' or @showAnyways() )
+      show = true
 
     @set markerVisible: show
     return show
