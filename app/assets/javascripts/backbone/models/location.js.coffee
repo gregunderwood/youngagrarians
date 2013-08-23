@@ -36,9 +36,8 @@ class Youngagrarians.Models.Location extends Backbone.RelationalModel
   showAnyways: =>
     show = @get('category').isHidden()
     type = @get('resource_type')
-    show = show && type == 'Web'
     console.log 'show: ', show, 'category is hidden: ', @get('category').isHidden(), 'type: ', type
-    return show
+    return show || type == 'Web'
 
 Youngagrarians.Models.Location.setup()
 
