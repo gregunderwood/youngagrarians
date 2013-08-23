@@ -187,12 +187,9 @@ class Youngagrarians.Collections.LocationsCollection extends Backbone.Collection
           return true
 
     if data.type == 'zoom' or data.type == 'dragend'
-      _(markers).each (latlng, i) =>
-        id = parseInt ids[i].replace("location-","")
-        location = @get id
-        if !_.isUndefined(location) and !_.isNull(location)
-          isVisible = location.get 'markerVisible'
-          location.set 'markerVisible', ( isVisible && $.goMap.isVisible(location) )
+      @each (m) =>
+        isVisible = m.get 'markerVisible'
+        m.set 'markerVisible', ( isVisible && $.goMap.isVisible(m) )
 
     if data.type == 'show'
       $.goMap.setMap
