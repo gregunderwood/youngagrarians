@@ -33,17 +33,18 @@ class Youngagrarians.Models.Location extends Backbone.RelationalModel
   locUrl: =>
     base = $("#root_url").data('url') + "#" + '/locations/' + @id
 
-  showAnyways: (category_id) =>
-    cat = @get('category')
-    show = cat.isHidden()
-    type = @get('resource_type') == 'Web'
-    cat = cat == category_id
-    return show || type || cat
+  showAnyways:  =>
+    return @get('category').isHidden()
 
   show: ( category_id ) =>
-    s = @showAnyways category_id
-    @set markerVisible: s
-    return s
+    hiddenCat = @showAnyways()
+    typeGood = @get('resource_type') == 'Web'
+    catMatch = @get('category').id == category_id
+
+    show = hiddenCat and typeGood and catMatch
+
+    @set markerVisible: show
+    return show
 
 Youngagrarians.Models.Location.setup()
 

@@ -17,7 +17,7 @@ class Youngagrarians.Models.Category extends Backbone.RelationalModel
 
   isHidden: =>
     #warning: hack, attribute in model would be better
-    return @get('name') == 'Web Resource'
+    return @get('name') == 'Web Resource' or @get('name') == 'Publication'
 
   getIcon: =>
     return '/~youngagr/map/assets/map-icons/' + @get('name').toLowerCase().replace(' ', '-') + ".png"
