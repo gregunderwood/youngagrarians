@@ -33,6 +33,9 @@ class Youngagrarians.Models.Location extends Backbone.RelationalModel
   locUrl: =>
     base = $("#root_url").data('url') + "#" + '/locations/' + @id
 
+  showAnyways: =>
+    return @get( 'resource_type' ) == 'Web'
+
 Youngagrarians.Models.Location.setup()
 
 class Youngagrarians.Collections.LocationsCollection extends Backbone.Collection
@@ -171,7 +174,7 @@ class Youngagrarians.Collections.LocationsCollection extends Backbone.Collection
           if @isEmpty( @category )
             goodToShow = false
 
-          if m.get('category').isHidden()
+          if m.get('category').isHidden() or m.showAnyways()
             goodToShow = goodToShow && true
 
           if !_.isUndefined m.marker
