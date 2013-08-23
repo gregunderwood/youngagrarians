@@ -117,7 +117,7 @@ class Youngagrarians.Collections.LocationsCollection extends Backbone.Collection
       @subcategory = data.data.subcategory
       @province = data.data.province
 
-    if data.type == 'update'
+    if data.type == 'update' or data.type == 'zoom' or data.type == 'dragend'
       @each (m) =>
 
         if !_.isUndefined(m) and !_.isNull(m)
@@ -177,19 +177,21 @@ class Youngagrarians.Collections.LocationsCollection extends Backbone.Collection
           if @isEmpty( @category )
             goodToShow = false
 
-          if m.showAnyways()
-            goodToShow = goodToShow && true
-
           if !_.isUndefined m.marker
             m.marker.setVisible goodToShow
+
+          if m.showAnyways()
+            goodToShow = true #goodToShow && true
 
           m.set markerVisible: goodToShow
           return true
 
+    ###
     if data.type == 'zoom' or data.type == 'dragend'
       @each (m) =>
         isVisible = m.get 'markerVisible'
         m.set 'markerVisible', ( isVisible && $.goMap.isVisible(m) )
+    ###
 
     if data.type == 'show'
       $.goMap.setMap
