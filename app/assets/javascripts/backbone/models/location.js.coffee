@@ -36,7 +36,7 @@ class Youngagrarians.Models.Location extends Backbone.RelationalModel
   showAnyways:  =>
     return @get('category').isHidden()
 
-  show: ( category_id ) =>
+  show: ( category_id, subcategory_id ) =>
     hiddenCat = @showAnyways()
     typeGood = @get('resource_type') == 'Web'
     catMatch = @get('category').id == category_id
@@ -44,8 +44,16 @@ class Youngagrarians.Models.Location extends Backbone.RelationalModel
     show = false
     if @get('category').id == category_id
       show = true
+
       if @get('resource_type') == 'Web' or hiddenCat
         show = true
+
+      if !_.isNull subcategory_id
+        subcatids = _.map @get('subcategory'), (s) ->
+          return s.id
+
+        if _.indexOf( subcatids, subcategory_id ) == -1
+          show = false
 
     return show
 
@@ -127,6 +135,9 @@ class Youngagrarians.Collections.LocationsCollection extends Backbone.Collection
       @subcategory = data.data.subcategory
       @province = data.data.province
 
+    console.log 'show: ', @show
+    console.log 'type: ', data.type
+
     if data.type == 'update' or data.type == 'zoom' or data.type == 'dragend'
       @each (m) =>
 
@@ -193,7 +204,7 @@ class Youngagrarians.Collections.LocationsCollection extends Backbone.Collection
           if m.showAnyways( @category )
             goodToShow = true
 
-          if m.show @category
+          if m.show( @category, @subcategory ) or _.indexOf( @show, m.id ) != -1
             m.set markerVisible: true
 
           return true
@@ -213,6 +224,5 @@ class Youngagrarians.Collections.LocationsCollection extends Backbone.Collection
           $.goMap.showHideMarker ids[i], true
         loc = @get(id)
         loc.set 'markerVisible', loc.marker.visible
-
 
     true

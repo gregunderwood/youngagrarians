@@ -12,12 +12,16 @@ class Youngagrarians.Views.Search extends Backbone.Marionette.ItemView
   initialize: (options) =>
     @app = options.app
     @app.vent.on "search:nothing", @showNilResults
+    @app.vent.on "search:complete", @searchComplete
 
   showNilResults: (e) =>
     @$el.find("span.alert.nil").slideDown()
     slideUp = () =>
       @$el.find("span.alert.nil").slideUp()
     _.delay slideUp, 4000
+
+  searchComplete: (e) =>
+    @$el.find('button#start-search').removeAttr 'disabled'
 
   doMapSearch: (e) =>
     e.preventDefault()
@@ -32,7 +36,7 @@ class Youngagrarians.Views.Search extends Backbone.Marionette.ItemView
       _.delay slideUp, 4000
     else
       @app.vent.trigger "search:started", terms
-
+    @$el.find("button#start-search").attr 'disabled', 'disabled'
 
   clearSearch: (e) =>
     @$el.find("input#search").val ''

@@ -25,6 +25,7 @@ class Youngagrarians.Views.ResultItem extends Backbone.Marionette.ItemView
 
   categoryChanged: (cat) =>
     @category = cat
+    @subcategory = null
     @changeShow @model
 
   subcategoryChanged: (data) =>
@@ -48,7 +49,7 @@ class Youngagrarians.Views.ResultItem extends Backbone.Marionette.ItemView
       else
         @$el.hide()
 
-      if @model.show( @category )
+      if @model.show( @category, @subcategory )
         @$el.show()
     else
       @$el.hide()

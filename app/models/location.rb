@@ -43,7 +43,7 @@ class Location < ActiveRecord::Base
       end
 
       if not subcategory.nil?
-        result = result + Location.all( :include => :subcategory, :conditions => ["subcategories.id = ?", subcategory.first.id ])
+        result = result + Location.all( :include => :subcategory, :conditions => ["subcategories.id = ?", subcategory.id ])
       end
 
       interested_fields = ["address", "name", "postal", "content","bioregion","phone","url","fb_url","twitter_url","description"]

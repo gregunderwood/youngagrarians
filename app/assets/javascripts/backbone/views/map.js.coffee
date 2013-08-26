@@ -102,6 +102,7 @@ class Youngagrarians.Views.Map extends Backbone.Marionette.CompositeView
     @collection.clearShow()
 
   searchSuccess: (data,status,xhr) =>
+    @app.vent.trigger "search:complete"
     ids = _(data).pluck 'id'
     locations = _(data).filter (v) ->
       v.address != ""
@@ -111,7 +112,9 @@ class Youngagrarians.Views.Map extends Backbone.Marionette.CompositeView
 
     showLocations = () =>
       if locations.length > 0
-        $.goMap.fitBounds('markers', locations )
+        newLoc = _.intersection locations, $.goMap.markers
+
+        $.goMap.fitBounds('markers', newLoc )
         if locations.length <= 1
           $.goMap.setMap
             zoom: 10
