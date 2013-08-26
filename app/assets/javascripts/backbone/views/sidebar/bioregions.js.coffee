@@ -9,7 +9,7 @@ class Youngagrarians.Views.Bioregions extends Backbone.Marionette.ItemView
       4: "Cariboo-Prince George"
       5: "Thompson-Okanagan"
       6: "Lower Mainland-Southwest"
-      7: "Kootenay"
+      7: "Kootenays"
 
   events:
     'change select#bioregions': 'changeBioregion'
@@ -21,11 +21,11 @@ class Youngagrarians.Views.Bioregions extends Backbone.Marionette.ItemView
   updateBioregions: (data) =>
     province = data.province
 
+    @$el.find("optgroup").remove()
+
     if !_.isNull(province) and !_.isUndefined(province)
       selector = province.toLowerCase()
       bioregions = @bioregions[selector]
-
-      @$el.find("optgroup").remove()
 
       if !_.isUndefined bioregions
         optgroup = $("<optgroup>")

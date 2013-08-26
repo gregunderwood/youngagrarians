@@ -33,7 +33,7 @@ class Youngagrarians.Views.Map extends Backbone.Marionette.CompositeView
       'lower-mainland-southwest':
         zoomCenter: '49.239121,-122.629395'
         zoomLevel: 9
-      'kootenay':
+      'kootenays':
         zoomCenter: '49.582226,-116.608887'
         zoomLevel: 8
 
