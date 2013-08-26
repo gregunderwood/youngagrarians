@@ -15,8 +15,8 @@ class Youngagrarians.Views.ResultItem extends Backbone.Marionette.ItemView
 
   initialize: (options) ->
     @app = options.app
-    #@app.vent.on 'category:change', @categoryChanged
-    #@app.vent.on 'subcategory:change', @subcategoryChanged
+    @app.vent.on 'category:change', @categoryChanged
+    @app.vent.on 'subcategory:change', @subcategoryChanged
     #@app.vent.on 'bioregion:change', @bioregionChanged
     @model.on 'change', @changeShow, @
 
@@ -25,21 +25,12 @@ class Youngagrarians.Views.ResultItem extends Backbone.Marionette.ItemView
 
   categoryChanged: (cat) =>
     @category = cat
-    if @model.get('category').get('id') == cat
-      @$el.show()
-    else
-      @$el.hide()
+    @changeShow @model
 
   subcategoryChanged: (data) =>
     @category = data.cat
     @subcategory = data.subcat
-
-    modelSubcategories = _(@model.get('subcategory')).pluck('id')
-
-    if @model.get('category').get('id') == @category and _(modelSubcategories).indexOf(@subcategory) >= 0
-      @$el.show()
-    else
-      @$el.hide()
+    @changeShow @model
 
   bioregionChanged: (data) =>
     bio = @model.get("bioregion")
@@ -57,7 +48,7 @@ class Youngagrarians.Views.ResultItem extends Backbone.Marionette.ItemView
       else
         @$el.hide()
 
-      if @model.get('category').isHidden() and @model.get 'markerVisible'
+      if @model.show( @category )
         @$el.show()
     else
       @$el.hide()

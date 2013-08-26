@@ -42,10 +42,11 @@ class Youngagrarians.Models.Location extends Backbone.RelationalModel
     catMatch = @get('category').id == category_id
 
     show = false
-    if @get('category').id == category_id and ( @get('resource_type') == 'Web' or @showAnyways() )
+    if @get('category').id == category_id
       show = true
+      if @get('resource_type') == 'Web' or hiddenCat
+        show = true
 
-    @set markerVisible: show
     return show
 
 Youngagrarians.Models.Location.setup()
@@ -190,18 +191,12 @@ class Youngagrarians.Collections.LocationsCollection extends Backbone.Collection
             m.marker.setVisible goodToShow
 
           if m.showAnyways( @category )
-            goodToShow = true #goodToShow && true
+            goodToShow = true
 
-          #m.set markerVisible: goodToShow
-          m.show @category
+          if m.show @category
+            m.set markerVisible: true
+
           return true
-
-    ###
-    if data.type == 'zoom' or data.type == 'dragend'
-      @each (m) =>
-        isVisible = m.get 'markerVisible'
-        m.set 'markerVisible', ( isVisible && $.goMap.isVisible(m) )
-    ###
 
     if data.type == 'show'
       $.goMap.setMap
