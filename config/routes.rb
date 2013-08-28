@@ -29,6 +29,9 @@ Youngagrarians::Application.routes.draw do
     get  '/password_reset/:code' => 'accounts#password_reset',     :as => :password_reset
     put  '/password_reset/:code' => 'accounts#reset_password',     :as => :reset_password
 
+    get  '/accounts' => 'accounts#list', :as => :list_users
+    delete '/delete_account/:id' => 'accounts#destroy', :as => :user
+
     get  '/verify_credentials'   => 'accounts#verify_credentials', :as => :verify_credentials
 
     post '/search' => 'locations#search', :as => :search

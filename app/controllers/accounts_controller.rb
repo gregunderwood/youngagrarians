@@ -7,6 +7,21 @@ class AccountsController < ApplicationController
     @hide_map = true
   end
 
+  def list
+    @users = User.all
+  end
+
+  def destroy
+    l = User.find params[:id]
+    l.destroy
+
+    respond_to do |format|
+      format.html { redirect_to :list_users }
+      format.json { head :no_content }
+    end
+
+  end
+
   def show
     respond_with @user = current_user
   end

@@ -5,7 +5,12 @@
 <% else %>
 <%= link_to "Show All", locations_path %>
 <% end %>
+<br />
 <%= link_to "Create User", create_account_path %>
+<%= link_to "List Users", list_users_path %>
+<br />
+<%= link_to "Export CSV", locations_path( :format => 'csv' )%>
+<%= link_to "Export XLS", locations_path( :format => 'xls' )%>
 
 <div id="locations-admin-list">
 	<%= form_for :locations_update, :html => { :id => 'locations-form' } do |f| %>

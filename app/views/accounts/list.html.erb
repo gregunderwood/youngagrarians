@@ -1,0 +1,8 @@
+<ul>
+<% @users.each do |u| %>
+<li>
+	<p><%= u.first_name %> <%= u.last_name %> ( <%= u.username %> )</p>
+	<%= link_to "Delete User?", u, :method => :delete, :data => { :confirm => 'Are you sure?' } %>
+</li>
+<% end %>
+</ul>
