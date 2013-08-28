@@ -140,6 +140,7 @@ class Youngagrarians.Collections.LocationsCollection extends Backbone.Collection
 
     if data.type == 'update' or data.type == 'zoom' or data.type == 'dragend'
       @each (m) =>
+        m.set markerVisible: false
 
         if !_.isUndefined(m) and !_.isNull(m)
           goodToShow = true
