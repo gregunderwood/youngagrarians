@@ -14,8 +14,8 @@ development:
   reconnect: true
   database: youngagr_mapper_development
   pool: 5
-  username: youngagr_mapper
-  password: m4pp|3
+  username: root
+  password: tem22pe
   #socket: /var/lib/mysql/mysql.sock
 
 # Warning: The database defined as "test" will be erased and
@@ -27,16 +27,6 @@ test:
   reconnect: true
   database: youngagr_mapper_test
   pool: 5
-  username: youngagr_mapper
-  password: m4pp|3
-  #socket: /var/lib/mysql/mysql.sock
-
-production:
-  adapter: mysql2
-  encoding: utf8
-  reconnect: true
-  database: youngagr_mapper_production
-  pool: 5
-  username: youngagr_mapper
-  password: m4pp|3
+  username: root
+  password: tem22pe
   #socket: /var/lib/mysql/mysql.sock

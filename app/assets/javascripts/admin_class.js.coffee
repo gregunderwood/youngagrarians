@@ -79,3 +79,5 @@ class window.Admin
               ids: ids
             success: (data,status,xhr) ->
               window.location.reload true
+
+@Admin = new Admin()

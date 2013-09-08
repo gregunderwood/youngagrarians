@@ -7,7 +7,6 @@ gem 'rake', '~> 10.0.4'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'mysql2'
-gem 'sqlite3'
 
 gem 'rails-backbone'
 gem 'marionette-rails'

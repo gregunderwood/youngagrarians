@@ -11,8 +11,6 @@ Youngagrarians::Application.routes.draw do
     match 'locations/:ids/multi-delete' => 'locations#destroy', :as => :multi_delete
     match 'locations/:ids/approve' => 'locations#approve', :as => :approve
 
-
-
     get "home/index"
     root :to => "home#index"
 
