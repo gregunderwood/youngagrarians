@@ -67,6 +67,16 @@ class Youngagrarians.Collections.LocationsCollection extends Backbone.Collection
   countryAlts:
     "Canada" : []
     "USA" : ["United States","US"]
+  
+  bioregions:
+    'bc':
+      1: "Northeast"
+      2: "Skeena-North Coast"
+      3: "Vancouver Island-Coast"
+      4: "Cariboo-Prince George"
+      5: "Thompson-Okanagan"
+      6: "Lower Mainland-Southwest"
+      7: "Kootenay"
 
   initialize: (options) ->
     @direct = false

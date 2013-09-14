@@ -43,12 +43,13 @@ class Youngagrarians.Views.Map extends Backbone.Marionette.CompositeView
 
   initialize: (options) =>
     @app = options.app
-    @app.vent.on 'bioregion:change', @bioRegionChanged
-    @app.vent.on 'province:change', @provinceChanged
-    @app.vent.on 'category:change', @categoryChanged
-    @app.vent.on 'subcategory:change', @subcategoryChanged
-    @app.vent.on 'search:started', @doSearch
-    @app.vent.on 'search:clear', @clearSearch
+    @collection.on 'reset', @updateMap
+
+  updateMap: =>
+    $.goMap.clearMarkers()
+    @collection.each (location)=>
+      marker = new Youngagrarians.Views.MapMarker
+        model: location    
 
   triggerCollectionUpdate: =>
     if not _.isUndefined( window.infoBubble ) and not _.isNull( window.infoBubble )
@@ -200,6 +201,7 @@ class Youngagrarians.Views.Map extends Backbone.Marionette.CompositeView
     )
 
     if @collection.length
+      debugger
       _(@children).each (child) ->
         marker = child.createMarker()
         marker.setVisible false

@@ -7,38 +7,30 @@ gem 'rake', '~> 10.0.4'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'mysql2'
-
-gem 'rails-backbone'
-gem 'marionette-rails'
+gem 'ejs'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
 	gem 'sass-rails',   '~> 3.2.3'
 	gem 'coffee-rails', '~> 3.2.1'
+  # Add Foundation Here
+  gem 'compass-rails' # you need this or you get an err
+  gem 'zurb-foundation', '~> 4.0.0'
+  gem 'font-awesome-rails'
 	gem 'eco'
-	gem 'rails-backbone'
+	
 	gem 'marionette-rails'
-
 	gem 'haml'
 	gem 'sass'
-
 	gem 'uglifier', '>= 1.0.3'
 end
-
-#gem 'mongoid', '~> 3.1.2'
 
 gem 'gmaps4rails'
 gem 'geocoder'
 
 gem 'jquery-rails'
-gem 'therubyracer'
-gem 'less-rails' #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
-gem 'twitter-bootstrap-rails'
 gem 'spreadsheet', '~> 0.8.3'
-
 gem 'bcrypt-ruby', '~> 3.0.0'
-
-# Auth
 gem 'warden',                 '~> 1.2.1'
 
 group :development, :test do
@@ -54,8 +46,6 @@ group :development, :test do
 	gem 'mail_safe',            '~> 0.3.1'
 	gem 'awesome_print',        '~> 1.0.2'
 	gem 'pry',                  '~> 0.9.10'
-	#gem 'remarkable_mongoid',   '~> 0.6.0'
-
 	gem 'fakeweb',              '~>1.3.0'
 	gem 'forgery',              '~>0.5.0'
 	gem 'table_print',          '~> 1.0.0'
@@ -69,9 +59,6 @@ group :development, :test do
 
 	# Javascript Testing
 	gem 'jasmine',              '~> 1.2.1'
-
-	# Mongoid RSpec
-	#gem 'mongoid-rspec'
 
 	# Docs
 	gem 'chef', '~> 11.4.0'

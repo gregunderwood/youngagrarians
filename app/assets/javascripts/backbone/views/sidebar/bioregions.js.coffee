@@ -1,22 +1,8 @@
 class Youngagrarians.Views.Bioregions extends Backbone.Marionette.ItemView
   template: "backbone/templates/sidebar/bioregions"
 
-  bioregions:
-    'bc':
-      1: "Northeast"
-      2: "Skeena-North Coast"
-      3: "Vancouver Island-Coast"
-      4: "Cariboo-Prince George"
-      5: "Thompson-Okanagan"
-      6: "Lower Mainland-Southwest"
-      7: "Kootenay"
-
   events:
     'change select#bioregions': 'changeBioregion'
-
-  initialize: (options) =>
-    @app = options.app
-    @app.vent.on 'province:change', @updateBioregions
 
   updateBioregions: (data) =>
     province = data.province
@@ -39,11 +25,14 @@ class Youngagrarians.Views.Bioregions extends Backbone.Marionette.ItemView
 
       @$el.find("select#bioregions").append optgroup
 
-
   changeBioregion: (e) =>
     e.preventDefault()
     selectedBioregion = $(e.target).find(":selected")
     if selectedBioregion.val() == "-1"
       @app.vent.trigger "bioregion:change", null
     else
-      @app.vent.trigger "bioregion:change", selectedBioregion.text()
+      @app.vent.trigger "bioregion:change", 
+        country: @model.get('country')
+        province: @model.get('province')
+        bioregion: selectedBioregion.text()
+

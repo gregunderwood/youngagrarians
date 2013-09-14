@@ -3,8 +3,9 @@ class Youngagrarians.Views.LegendItem extends Backbone.Marionette.ItemView
   tagName: "li"
 
   events:
-    "click a": "selectCat"
-
+    "click a.select-category": "selectCat"
+    "click a.show-subcategories": "showSubcategories"
+    
   initialize: (options) =>
     @app = options.app
 
@@ -13,6 +14,9 @@ class Youngagrarians.Views.LegendItem extends Backbone.Marionette.ItemView
     data.img = @model.getIcon()
     data
 
+  showSubcategories: =>
+    debugger;
+
   selectCat: (e) =>
     e.preventDefault()
-    @app.vent.trigger "legend:clicked", @model.get("id")
+    @app.vent.trigger "category:change", @model.get("id")

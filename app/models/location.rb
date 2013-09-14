@@ -64,8 +64,6 @@ class Location < ActiveRecord::Base
           result = result + Location.find( :all, :conditions => ["is_approved = 1 AND #{i} LIKE ? AND ( address LIKE ? OR address LIKE ? ) AND show_until > ?", "%#{term}%", "%#{abbrev}%", "%#{province}%", Date.today])
         end
 
-
-
       end
     end
     return result.uniq

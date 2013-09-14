@@ -10,4 +10,6 @@ class Youngagrarians.Views.Provinces extends Backbone.Marionette.ItemView
   changeProvince: (e) =>
     e.preventDefault()
     selected = $(e.target).find(":selected")
-    @app.vent.trigger 'province:change', { country: selected.data('country'), province: selected.data('province') }
+    @app.vent.trigger 'province:change', 
+      country: selected.data('country')
+      province: selected.data('province')

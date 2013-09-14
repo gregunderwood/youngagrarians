@@ -3,33 +3,38 @@ class Youngagrarians.Views.Sidebar extends Backbone.Marionette.Layout
   itemView: Youngagrarians.Views.SidebarItem
 
   regions:
-    provinces: "#map-provinces"
+    provinces:  "#map-provinces"
     bioregions: "#map-bioregions"
-    categories: "#map-category"
-    legend: "#map-legend-container"
-    search: "#map-search"
-    extras: "#extras"
+    legend:     "#map-legend-container"
+    search:     "#map-search"
+    extras:     "#extras"
 
   events:
     "click a.hide-show": "toggleLegend"
 
   initialize: (options) ->
     @app = options.app
-    @provincesView = new Youngagrarians.Views.Provinces app: @app
-    @bioregionsView = new Youngagrarians.Views.Bioregions app: @app
-    @categoriesView = new Youngagrarians.Views.Categories app: @app, collection: @collection
-    @legendView = new Youngagrarians.Views.Legend app: @app, collection: @collection
-    @searchView = new Youngagrarians.Views.Search app: @app
-    @extrasView = new Youngagrarians.Views.Extras app: @app
-
+    @data = options.data
+    @provincesView = new Youngagrarians.Views.Provinces 
+      results: options.results      
+    @legendView = new Youngagrarians.Views.Legend 
+      collection: @data.categories
+      app: @app
+    @searchView = new Youngagrarians.Views.Search 
+      app: @app
+    @extrasView = new Youngagrarians.Views.Extras 
+      app: @app
+    @app.vent.on 'province:change', @provinceChanged
+  
   onRender: =>
     @.provinces.show @provincesView
-    @.bioregions.show @bioregionsView
-    @.categories.show @categoriesView
     @.legend.show @legendView
     @.search.show @searchView
     @.extras.show @extrasView
-
+  
+  provinceChanged: (options)=>
+    0
+  
   toggleLegend: (e) =>
     e.preventDefault()
 

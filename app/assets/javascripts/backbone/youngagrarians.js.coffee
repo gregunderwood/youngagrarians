@@ -18,42 +18,41 @@ YA.addRegions
   results: "#results"
 
 YA.addInitializer (options) ->
-  window.Locations = new Youngagrarians.Collections.LocationsCollection()
-  window.Categories = new Youngagrarians.Collections.CategoriesCollection()
-  window.Subcategories = new Youngagrarians.Collections.SubcategoryCollection()
+  data = 
+    locations: new Youngagrarians.Collections.LocationsCollection()
+    categories: new Youngagrarians.Collections.CategoriesCollection()
+    subcategories: new Youngagrarians.Collections.SubcategoryCollection()
+  
+  for key, collection of data  
+    collection.fetch
+      reset: true
 
-  window.Categories.fetch
-    reset: true
+  results = new Youngagrarians.Collections.ResultsCollection
+    locations: data.locations
+    
+  # I'm pretty sure it's something to do with backbone relational that is adding a model to my collection by default
+  # but this hack clears the collection
+  results.reset([])
+  
+  @sidebarView = new Youngagrarians.Views.Sidebar 
+    data: data
+    app: @    
+  @.sidebar.show @sidebarView
+  
+  @mapView = new Youngagrarians.Views.Map
+    collection: results
+  @.map.show @mapView
+  
+  @resultsView = new Youngagrarians.Views.Results
+    collection: results  
+  @.results.show @resultsView
 
-  window.Locations.fetch
-    reset: true
-
-  window.Subcategories.fetch
-    reset: true
+  @.vent.on 'province:change', results.changeRegion
+  @.vent.on 'bioregion:change', results.changeRegion
+  @.vent.on 'category:change', results.changeCategory
+  @.vent.on 'search', results.search
+  @.vent.on 'search:clear', results.clearSearch
 
 YA.addInitializer (options) ->
   router = new Youngagrarians.Routers.LocationsRouter()
   Backbone.history.start()
-
-YA.addInitializer (options) ->
-  @sidebarView = new Youngagrarians.Views.Sidebar collection: Categories, app: @
-  @.sidebar.show @sidebarView
-  @mapView = new Youngagrarians.Views.Map collection: Locations, app: @
-  @.map.show @mapView
-  @resultsView = new Youngagrarians.Views.Results collection: Locations, map: map, app: @
-  @.results.show @resultsView
-
-
-YA.addInitializer (options) ->
-  resizer = (event) =>
-    SKIM_HEIGHT = 80
-    @newMapHeight = $(window).height() - $("#ya-nav").height() - SKIM_HEIGHT
-    @newMapWidth = $(window).width() - $("#main #sidebar").outerWidth()
-
-    $("#map").css height: @newMapHeight+'px', width: @newMapWidth+'px'
-
-  window.onresize = resizer
-  resizer()
-
-
-YA.addInitializer (options) ->

@@ -1,0 +1,46 @@
+#map {
+   height: 560px;
+   min-height: 400px;
+   width: 75%;
+   min-width: 300px;
+   /* Bootstrap Css Map Fix*/
+  img { 
+    max-width: none;
+  }label { 
+    width: auto; display:inline; 
+  } 
+}
+
+#sidebar {
+  ul {
+    list-style-type: none;
+    
+    li {
+      .legend-item-icon {
+        max-height: 16px;
+        max-width: 16px;
+        margin-left: 8px;
+      }
+    }
+  }
+}
+
+#results {
+  ul.results-list {
+    margin: 10px 20px 0;
+    list-style-type: none;
+    
+    li {
+      margin-bottom: 10px;
+      img {
+        display: inline-block;
+        margin-right: 5px;
+      }
+      p.location-description {
+        margin: 0;
+        padding: 0;
+        display: inline;
+      }
+    }
+  }
+}
