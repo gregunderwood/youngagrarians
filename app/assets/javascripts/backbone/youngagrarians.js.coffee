@@ -36,6 +36,7 @@ YA.addInitializer (options) ->
   
   @sidebarView = new Youngagrarians.Views.Sidebar 
     data: data
+    results: results
     app: @    
   @.sidebar.show @sidebarView
   
@@ -49,9 +50,17 @@ YA.addInitializer (options) ->
 
   @.vent.on 'province:change', results.changeRegion
   @.vent.on 'bioregion:change', results.changeRegion
-  @.vent.on 'category:change', results.changeCategory
+  @.vent.on 'category:add', results.addCategory
+  @.vent.on 'category:add', @sidebarView.addSelectedCategory
+  @.vent.on 'category:remove', results.removeCategory
+  @.vent.on 'category:remove', @sidebarView.remmoveSelectedCategory
+  @.vent.on 'subcategory:add', results.addSubcategory
+  @.vent.on 'subcategory:add', @sidebarView.addSelectedCategory
+  @.vent.on 'subcategory:remove', results.removeSubcategory
+  @.vent.on 'subcategory:remove', @sidebarView.remmoveSelectedCategory
   @.vent.on 'search', results.search
   @.vent.on 'search:clear', results.clearSearch
+  @.vent.on 'update:locations', data.locations.updateLocationsFromGoogleMaps
 
 YA.addInitializer (options) ->
   router = new Youngagrarians.Routers.LocationsRouter()

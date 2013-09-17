@@ -6,6 +6,8 @@ class Youngagrarians.Views.Sidebar extends Backbone.Marionette.Layout
     provinces:  "#map-provinces"
     bioregions: "#map-bioregions"
     legend:     "#map-legend-container"
+    selectedCategories: '#map-selected-categories'
+    selectedSubcategories: '#map-selected-subcategories'
     search:     "#map-search"
     extras:     "#extras"
 
@@ -24,13 +26,21 @@ class Youngagrarians.Views.Sidebar extends Backbone.Marionette.Layout
       app: @app
     @extrasView = new Youngagrarians.Views.Extras 
       app: @app
+    @selectedCategoriesView = new Youngagrarians.Views.SelectedCategories
+      app: @app
+      collection: options.results.selectedCategories
+    @selectedSubcategoriesView = new Youngagrarians.Views.SelectedCategories
+      app: @app
+      collection: options.results.selectedSubcategories
     @app.vent.on 'province:change', @provinceChanged
   
   onRender: =>
-    @.provinces.show @provincesView
-    @.legend.show @legendView
-    @.search.show @searchView
-    @.extras.show @extrasView
+    @provinces.show @provincesView
+    @legend.show @legendView
+    @search.show @searchView
+    @extras.show @extrasView
+    @selectedCategories.show @selectedCategoriesView
+    @selectedSubcategories.show @selectedSubcategoriesView
   
   provinceChanged: (options)=>
     0

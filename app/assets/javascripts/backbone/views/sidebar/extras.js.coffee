@@ -6,9 +6,13 @@ class Youngagrarians.Views.Extras extends Backbone.Marionette.ItemView
   events:
     'click a#add-to-map': 'addLocation'
     'click a#show-about': 'showAbout'
+    'click a#update-locations': 'updateLocations'
 
   initialize: (options) =>
     @app = options.app
+
+  updateLocations: =>
+    @app.vent.trigger 'update:locations'
 
   addLocation: (e) =>
     e.preventDefault()

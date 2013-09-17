@@ -19,4 +19,4 @@ class Youngagrarians.Views.LegendItem extends Backbone.Marionette.ItemView
 
   selectCat: (e) =>
     e.preventDefault()
-    @app.vent.trigger "category:change", @model.get("id")
+    @app.vent.trigger "category:add", @model

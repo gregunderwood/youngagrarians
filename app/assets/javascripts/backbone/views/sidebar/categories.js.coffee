@@ -17,7 +17,7 @@ class Youngagrarians.Views.Categories extends Backbone.Marionette.ItemView
 
   legendClicked: (e) =>
     @$el.find("select#category").val e
-    @app.vent.trigger 'category:change', e
+    @app.vent.trigger 'category:add', e
 
   changeCategory: (e) =>
     e.preventDefault()
@@ -27,6 +27,6 @@ class Youngagrarians.Views.Categories extends Backbone.Marionette.ItemView
     if _.isUndefined categoryId
       subcategoryId = selected.data('subcat')
       categoryId = selected.parent().data 'cat'
-      @app.vent.trigger 'subcategory:change', { cat: categoryId, subcat: subcategoryId }
+      @app.vent.trigger 'subcategory:add', { cat: categoryId, subcat: subcategoryId }
     else
-      @app.vent.trigger 'category:change', categoryId
+      @app.vent.trigger 'category:add', categoryId

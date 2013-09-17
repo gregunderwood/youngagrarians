@@ -188,6 +188,12 @@ class LocationsController < ApplicationController
     if params.has_key? :id
       location = Location.find(params[:id])
       @locations = [ location ]
+      location_params = params.clone
+      [:created_at, :id, :updated_at, :category, :subcategory, :markerVisible, :action, :controller, :location].each do |param|
+        location_params.delete param
+      end
+      location.update_attributes location_params
+      @errors = location.errors
     elsif params.has_key? :locations
       params[:locations][:location].each do |data|
         l = Location.find data[0]

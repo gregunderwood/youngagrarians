@@ -7,6 +7,8 @@ class Youngagrarians.Models.Subcategory extends Backbone.RelationalModel
   getIcon: =>
     return '~youngagr/map/assets/map-icons/' + @get('name').toLowerCase().replace(' ', '-') + ".png"
 
+  removeEvent: "subcategory:remove"
+
 Youngagrarians.Models.Subcategory.setup()
 
 class Youngagrarians.Collections.SubcategoryCollection extends Backbone.Collection

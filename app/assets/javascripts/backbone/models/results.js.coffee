@@ -5,31 +5,43 @@ class Youngagrarians.Collections.ResultsCollection extends Backbone.Collection
     @locations = options.locations
     @currentProvice = null
     @currentBioregion = null
+    @currentTerms = null
+    @selectedCategories = new Backbone.Collection()
+    @selectedSubcategories = new Backbone.Collection()
     
-  addCategory: (id)=>
-    locations = @locations.filter (location)=>
-      location.get('category').id == id
-    @.reset locations
+  addCategory: (category)=>
+    @selectedCategories.add category
+    @update()
   
-  removeCategory: (id)=>
-    locations = @locations.filter (location)=>
-      location.get('category').id == id
-    @.reset locations
+  removeCategory: (category)=>
+    @selectedCategories.remove category 
+    @update()
+  
+  addSubcategory: (subcategory)=>
+    @selectedSubcategories.add subcategory
+    @update()
+  
+  removeSubcategory: (subcategory)=>
+    @selectedSubcategories.remove category 
+    @update()
     
   changeRegion: (options)=>
-    debugger
-    
+    @currentProvince = options.province if  options.province
+    @currentBioregion = options.bioregion if options.bioregion 
+    @update()
+  
   search: (terms)=>
-    debugger
+    @currentTerms = terms
+    @update()
     
   clearSearch: =>
-    debugger
+    if terms
+      terms = null
+      @update()
     
-  addSubcategory: (id)=>
-    debugger
-    
-  removeSubcategory: (id)=>
-    debugger
-    
-  clear
-    
+  update: =>
+    locations = []
+    @selectedCategories.each (category)=>
+      locations = _.union locations, @locations.filter (location)=>
+        location.get('category').id == category.id
+    @.reset _.uniq locations

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130815030912) do
+ActiveRecord::Schema.define(:version => 20130915213759) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -32,14 +32,20 @@ ActiveRecord::Schema.define(:version => 20130815030912) do
     t.string   "fb_url"
     t.string   "twitter_url"
     t.text     "description"
-    t.boolean  "is_approved",   :default => false
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
+    t.boolean  "is_approved",    :default => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
     t.integer  "category_id"
     t.string   "resource_type"
     t.string   "email"
     t.string   "postal"
     t.date     "show_until"
+    t.string   "street_address"
+    t.string   "city"
+    t.string   "country_code"
+    t.string   "country_name"
+    t.string   "province_code"
+    t.string   "province_name"
   end
 
   add_index "locations", ["is_approved"], :name => "index_locations_on_is_approved"
