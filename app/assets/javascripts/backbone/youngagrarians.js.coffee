@@ -51,13 +51,9 @@ YA.addInitializer (options) ->
   @.vent.on 'province:change', results.changeRegion
   @.vent.on 'bioregion:change', results.changeRegion
   @.vent.on 'category:add', results.addCategory
-  @.vent.on 'category:add', @sidebarView.addSelectedCategory
-  @.vent.on 'category:remove', results.removeCategory
-  @.vent.on 'category:remove', @sidebarView.remmoveSelectedCategory
+  @.vent.on 'category:remove', results.removeCategory  
   @.vent.on 'subcategory:add', results.addSubcategory
-  @.vent.on 'subcategory:add', @sidebarView.addSelectedCategory
   @.vent.on 'subcategory:remove', results.removeSubcategory
-  @.vent.on 'subcategory:remove', @sidebarView.remmoveSelectedCategory
   @.vent.on 'search', results.search
   @.vent.on 'search:clear', results.clearSearch
   @.vent.on 'update:locations', data.locations.updateLocationsFromGoogleMaps

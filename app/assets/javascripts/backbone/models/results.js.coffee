@@ -9,8 +9,12 @@ class Youngagrarians.Collections.ResultsCollection extends Backbone.Collection
     @selectedCategories = new Backbone.Collection()
     @selectedSubcategories = new Backbone.Collection()
     
-  addCategory: (category)=>
+  addCategory: (category)=>    
     @selectedCategories.add category
+    category.get('subcategory').each (subcategory)=>
+      subcategory = @selectedSubcategories.find (sub)->
+        sub.id == subcategory.id
+      @selectedSubcategories.remove subcategory if subcategory
     @update()
   
   removeCategory: (category)=>
@@ -18,11 +22,14 @@ class Youngagrarians.Collections.ResultsCollection extends Backbone.Collection
     @update()
   
   addSubcategory: (subcategory)=>
+    category = @selectedCategories.find (cat)->
+      cat.id == subcategory.get('category_id')
+    @selectedCategories.remove category if category
     @selectedSubcategories.add subcategory
     @update()
   
   removeSubcategory: (subcategory)=>
-    @selectedSubcategories.remove category 
+    @selectedSubcategories.remove subcategory 
     @update()
     
   changeRegion: (options)=>
@@ -44,4 +51,8 @@ class Youngagrarians.Collections.ResultsCollection extends Backbone.Collection
     @selectedCategories.each (category)=>
       locations = _.union locations, @locations.filter (location)=>
         location.get('category').id == category.id
-    @.reset _.uniq locations
+    @selectedSubcategories.each (subcategory)=>
+      locations = _.union locations, @locations.filter (location)=>
+        _.find location.get('subcategory'), (s)->
+          subcategory.id == s.id  
+    @.reset _.uniq(locations)
