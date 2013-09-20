@@ -39,7 +39,6 @@ class Youngagrarians.Views.Map extends Backbone.Marionette.CompositeView
 
   collectionEvents:
     'reset' : 'addMarkers'
-    'add'   : 'addMarker'
 
   initialize: (options) =>
     @app = options.app
@@ -47,9 +46,17 @@ class Youngagrarians.Views.Map extends Backbone.Marionette.CompositeView
 
   updateMap: =>
     $.goMap.clearMarkers()
+    markers = new Backbone.Collection()
+    bounds = new google.maps.LatLngBounds()
     @collection.each (location)=>
-      marker = new Youngagrarians.Views.MapMarker
-        model: location    
+      markers.add new Youngagrarians.Views.MapMarker
+        model: location
+      if location.lat() and location.lng()
+        coords = new google.maps.LatLng(location.lat(), location.lng())
+        bounds.extend coords
+    map = $.goMap.getMap()
+    map.fitBounds(bounds)
+    
 
   triggerCollectionUpdate: =>
     if not _.isUndefined( window.infoBubble ) and not _.isNull( window.infoBubble )
@@ -201,7 +208,6 @@ class Youngagrarians.Views.Map extends Backbone.Marionette.CompositeView
     )
 
     if @collection.length
-      debugger
       _(@children).each (child) ->
         marker = child.createMarker()
         marker.setVisible false

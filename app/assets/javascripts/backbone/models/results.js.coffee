@@ -54,5 +54,8 @@ class Youngagrarians.Collections.ResultsCollection extends Backbone.Collection
     @selectedSubcategories.each (subcategory)=>
       locations = _.union locations, @locations.filter (location)=>
         _.find location.get('subcategory'), (s)->
-          subcategory.id == s.id  
+          subcategory.id == s.id
+    locations = _.where(locations, {province_code: @currentProvince}) if @currentProvince
+    locations = _.where(locations, {bioregion: @currentBioregion}) if @currentBioregion
     @.reset _.uniq(locations)
+
