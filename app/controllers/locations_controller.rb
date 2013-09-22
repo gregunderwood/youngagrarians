@@ -5,16 +5,10 @@ class LocationsController < ApplicationController
 
   @tmp = {}
 
-  def search
-    @locations = []
-    if not params[:province].nil?
-      @locations = Location.search params[:terms], params[:province]
-    else
-      @locations = Location.search params[:terms]
-    end
-
+  def search    
+    @locations = Location.search params[:term]
     respond_to do |format|
-      format.json { render :json =>  @locations }
+      format.json { render :json => @locations.map(&:id) }
     end
   end
 
@@ -38,7 +32,7 @@ class LocationsController < ApplicationController
         end
 
         @hide_map = true
-      }# index.html.erb
+      }
       format.json {
         @locations = Location.where( "is_approved = 1 AND ( show_until is null OR show_until > ? )", Date.today ).all
 

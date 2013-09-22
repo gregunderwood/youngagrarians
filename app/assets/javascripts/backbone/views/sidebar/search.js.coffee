@@ -5,23 +5,22 @@ class Youngagrarians.Views.Search extends Backbone.Marionette.ItemView
   className: "form-horizontal"
 
   events:
-    'submit form#search-form': 'doMapSearch'
-    'click button#start-search': 'doMapSearch'
-    'click a#map-search-clear' : 'clearSearch'
+    'submit form#search-form':    'doMapSearch'
+    'click button#search-button': 'doMapSearch'
+    'click a#map-search-clear' :  'clearSearch'
 
   initialize: (options) =>
     @app = options.app
 
   doMapSearch: (e) =>
     e.preventDefault()
-    terms = @$el.find("input#search").val()
-    if terms == ''
+    term = @$el.find("input#search").val()
+    if term == ''
       @$el.find("span.alert").slideDown()
-      slideUp = () =>
-        @$el.find("span.alert").slideUp()
-      _.delay slideUp, 4000
+      @$el.find("span.alert").slideUp()
     else
-      @app.vent.trigger "search", terms
+      @app.vent.trigger "search", 
+        term: term
 
   clearSearch: (e) =>
     @$el.find("input#search").val ''

@@ -6,7 +6,7 @@ class Youngagrarians.Models.Category extends Backbone.RelationalModel
 
   relations: [
     type: 'HasMany'
-    key: 'subcategory'
+    key: 'subcategories'
     relatedModel: 'Youngagrarians.Models.Subcategory'
     includeInJSON: [Backbone.Model.prototype.idAttribute, 'name']
     collectionType: 'Youngagrarians.Collections.SubcategoryCollection'

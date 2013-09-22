@@ -11,7 +11,7 @@ class Youngagrarians.Collections.ResultsCollection extends Backbone.Collection
     
   addCategory: (category)=>    
     @selectedCategories.add category
-    category.get('subcategory').each (subcategory)=>
+    category.get('subcategories').each (subcategory)=>
       subcategory = @selectedSubcategories.find (sub)->
         sub.id == subcategory.id
       @selectedSubcategories.remove subcategory if subcategory
@@ -38,13 +38,21 @@ class Youngagrarians.Collections.ResultsCollection extends Backbone.Collection
     @currentBioregion = options.bioregion 
     @update() if stateChanged
   
-  search: (terms)=>
-    @currentTerms = terms
-    @update()
+  search: (options)=>
+    promise = $.ajax 
+      url: '/~youngagr/map/search'
+      type: 'POST'
+      data: 
+        term: options.term
+      dataType: 'json'
+    promise.done (data)=>
+      @searchLocations = data 
+      @update()
+      options.complete() if options.complete
     
   clearSearch: =>
-    if terms
-      terms = null
+    if @searchLocations
+      @searchLocations = null
       @update()
     
   update: =>
@@ -54,7 +62,7 @@ class Youngagrarians.Collections.ResultsCollection extends Backbone.Collection
         location.get('category').id == category.id
     @selectedSubcategories.each (subcategory)=>
       locations = _.union locations, @locations.filter (location)=>
-        _.find location.get('subcategory'), (s)->
+        _.find location.get('subcategories'), (s)->
           subcategory.id == s.id    
     if @currentSubdivision
       locations = _.filter locations, (location)=>
@@ -62,5 +70,8 @@ class Youngagrarians.Collections.ResultsCollection extends Backbone.Collection
     if @currentBioregion
       locations = _.filter locations, (location)=>
         location.get('bioregion') == @currentBioregion
+    if @searchLocations
+      locations = _.filter locations, (location)=>
+        _.contains @searchLocations, location.id
     @.reset _.uniq(locations)
 

@@ -21,7 +21,7 @@ class Youngagrarians.Views.LegendItem extends Backbone.Marionette.Layout
     unless @subcategoriesView
       @subcategoriesView = new Youngagrarians.Views.Subcategories
         app: @app
-        collection: @model.get('subcategory')      
+        collection: @model.get('subcategories')      
       @subcategories.show @subcategoriesView
     else
       @subcategories.$el.toggle()

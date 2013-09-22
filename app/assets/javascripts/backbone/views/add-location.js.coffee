@@ -34,7 +34,7 @@ class Youngagrarians.Views.AddLocation extends Backbone.Marionette.View
     if id >= 0
       cat = window.Categories.get id
       select = @$el.find("select#subcategory").empty()
-      subcats = cat.get('subcategory')
+      subcats = cat.get('subcategories')
 
       if subcats.length == 0
         select.prop 'disabled', 'disabled'
