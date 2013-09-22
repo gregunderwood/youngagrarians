@@ -1,3 +1,5 @@
+#= require ./sidebar/bioregions
+#= require ./sidebar/provinces
 class Youngagrarians.Views.Sidebar extends Backbone.Marionette.Layout
   template: "backbone/templates/sidebar"
   itemView: Youngagrarians.Views.SidebarItem
@@ -17,8 +19,8 @@ class Youngagrarians.Views.Sidebar extends Backbone.Marionette.Layout
   initialize: (options) ->
     @app = options.app
     @data = options.data
-    @provincesView = new Youngagrarians.Views.Provinces 
-      results: options.results      
+    @provincesView = new Youngagrarians.Views.Provinces
+      app: @app
     @legendView = new Youngagrarians.Views.Legend 
       collection: @data.categories
       app: @app
@@ -35,24 +37,26 @@ class Youngagrarians.Views.Sidebar extends Backbone.Marionette.Layout
     @app.vent.on 'province:change', @provinceChanged
   
   onRender: =>
+    @extras.show @extrasView
+    @search.show @searchView    
     @provinces.show @provincesView
     @legend.show @legendView
-    @search.show @searchView
-    @extras.show @extrasView
     @selectedCategories.show @selectedCategoriesView
     @selectedSubcategories.show @selectedSubcategoriesView
   
   provinceChanged: (options)=>
-    0
-  
-  toggleLegend: (e) =>
-    e.preventDefault()
-
-    currentlyShown = !!$(e.target).data('legend-shown')
-
-    if currentlyShown
-      $(e.target).data('legend-shown', 0).text("Show")
-      $( @legendView.el ).hide()
+    if options.country and options.subdivision
+      country = _.findWhere Youngagrarians.Constants.COUNTRIES, {code: options.country}
+      subdivision = _.findWhere country.subdivisions, {code: options.subdivision}
+      if subdivision.bioregions.length > 0
+        unless @bioregionView
+          @bioregionView = new Youngagrarians.Views.Bioregions
+            app: @app      
+        @bioregions.show @bioregionView
+        @bioregionView.updateBioregions(options)
+        @bioregionView.$el.show()
+      else
+        @bioregionView.$el.hide() if @bioregionView
     else
-      $(e.target).data('legend-shown', 1).text("Hide")
-      $( @legendView.el ).show()
+      @bioregionView.$el.hide() if @bioregionView
+      

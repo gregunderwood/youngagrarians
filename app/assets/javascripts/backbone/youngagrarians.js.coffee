@@ -49,6 +49,7 @@ YA.addInitializer (options) ->
   @.results.show @resultsView
 
   @.vent.on 'province:change', results.changeRegion
+  @.vent.on 'province:change', @sidebarView.changeProvince
   @.vent.on 'bioregion:change', results.changeRegion
   @.vent.on 'category:add', results.addCategory
   @.vent.on 'category:remove', results.removeCategory  

@@ -53,120 +53,13 @@ class Youngagrarians.Views.Map extends Backbone.Marionette.CompositeView
         model: location
       if location.lat() and location.lng()
         coords = new google.maps.LatLng(location.lat(), location.lng())
-        bounds.extend coords
-    map = $.goMap.getMap()
-    map.fitBounds(bounds)
-    
-
-  triggerCollectionUpdate: =>
-    if not _.isUndefined( window.infoBubble ) and not _.isNull( window.infoBubble )
-      window.infoBubble.close()
-
-    data =
-      country: @country
-      province: @province
-      category: @category
-      subcategory: @subcategory
-      bioregion: @bioregion
-      event: 'update'
-    @collection.trigger 'map:update', {type: 'update', data: data}
-    @centerMap()
-
-  categoryChanged: (category) =>
-    @category = category
-    @subcategory = null
-    @triggerCollectionUpdate()
-
-  subcategoryChanged: (data) =>
-    @category = data.cat
-    @subcategory = data.subcat
-    @triggerCollectionUpdate()
-
-  provinceChanged: (data) =>
-    @country = data.country
-    @province = data.province
-    if !_.isNull( @province ) and !_.isUndefined( @province )
-      @provinceSelector = @province.toLowerCase()
-    else
-      @provinceSelector = null
-    @bioregion = null
-    @triggerCollectionUpdate()
-
-  bioRegionChanged: (bioregion) =>
-    @bioregion = bioregion
-    if !_.isNull( @bioregion ) and !_.isUndefined( @bioregion )
-      @bioregionSelector = bioregion.toLowerCase().replace " ", "-"
-    @triggerCollectionUpdate()
+        bounds.extend coords    
+    $.goMap.getMap().fitBounds(bounds) if markers.length > 0
 
   addMarkers: (col) =>
     _.defer =>
       @children.each ( child ) =>
         marker = child.createMarker()
-
-  addMarker: (model) =>
-    @addMarkers model.collection
-
-  clearSearch: (e) =>
-    @collection.clearShow()
-
-  searchSuccess: (data,status,xhr) =>
-    ids = _(data).pluck 'id'
-    locations = _(data).filter (v) ->
-      v.address != ""
-
-    locations = _(locations).pluck('id').map (id) ->
-      'location-'+id
-
-    showLocations = () =>
-      $.goMap.fitBounds('markers', locations )
-      if locations.length <= 1
-        $.goMap.setMap
-          zoom: 10
-      @collection.setShow ids
-
-    _.delay showLocations, 100
-
-  doSearch: (e) =>
-    $.ajax
-      type: "POST"
-      url: "/~youngagr/map/search"
-      data:
-        terms: e
-      success: @searchSuccess
-
-  doSearchProvince: (e) =>
-    e.preventDefault()
-    console.log 'here'
-
-    terms = $("#map-search-terms").val()
-    province = $(e.target).data('province')
-
-    $.ajax
-      type: "POST"
-      url: "/~youngagr/search"
-      data:
-        terms: terms
-        province: province
-      success: @searchSuccess
-
-  centerMap: =>
-    center = ''
-    zoom = 5
-    if !_.isNull( @province ) and !_.isNull( @country )
-      center = @province + ", " + @country
-    else if !_.isNull( @country )
-      center = @country
-
-    if !_.isNull( @bioregion )
-      provinceSelector = @province.toLowerCase()
-      bioregionSelector = @bioregion.toLowerCase().replace ' ', '-'
-      center = @bioregionAreas[ provinceSelector ][ bioregionSelector ][ 'zoomCenter' ]
-      zoom = @bioregionAreas[ provinceSelector ][ bioregionSelector ][ 'zoomLevel' ]
-
-    if center != ''
-      $.goMap.setMap
-        address: center
-        zoom: zoom
 
   onShow: () =>
     @show = []
@@ -176,8 +69,6 @@ class Youngagrarians.Views.Map extends Backbone.Marionette.CompositeView
       zoom: 5
       maptype: 'ROADMAP'
       scrollwheel: false
-
-    @centerMap()
 
     $.goMap.createListener(
       'map'
@@ -211,9 +102,5 @@ class Youngagrarians.Views.Map extends Backbone.Marionette.CompositeView
       _(@children).each (child) ->
         marker = child.createMarker()
         marker.setVisible false
-
     true
 
-  filter: (data) =>
-    data = _.extend { province: @province, category: @category, subcategory: @subcategory, bioregion: @bioregion }, data
-    @collection.trigger 'map:update', {type: 'filter', data: data}

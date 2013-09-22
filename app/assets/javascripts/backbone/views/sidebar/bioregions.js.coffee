@@ -1,38 +1,26 @@
 class Youngagrarians.Views.Bioregions extends Backbone.Marionette.ItemView
   template: "backbone/templates/sidebar/bioregions"
-
   events:
-    'change select#bioregions': 'changeBioregion'
+    'change select': 'changeBioregion'
 
-  updateBioregions: (data) =>
-    province = data.province
+  initialize: (options)=>
+    @app = options.app
 
-    if !_.isNull(province) and !_.isUndefined(province)
-      selector = province.toLowerCase()
-      bioregions = @bioregions[selector]
+  updateBioregions: (options) =>
+    @country = _.findWhere Youngagrarians.Constants.COUNTRIES, {code: options.country}
+    @subdivision = _.findWhere @country.subdivisions, {code: options.subdivision}
+    $select = @$('select')
+    $select.empty()
+    $select.append '<option value="-1">Pick A BioRegion</option>'
+    _.each @subdivision.bioregions, (region)=>
+      option = $("<option>").attr('value', region.name).text(region.name)
+      $select.append(option)
 
-      @$el.find("optgroup").remove()
-
-      if !_.isUndefined bioregions
-        optgroup = $("<optgroup>")
-          .attr( 'id', "bioregions-"+selector )
-          .attr( 'label', province+" Bioregions" )
-        _(bioregions).each (region,index) ->
-          option = $("<option>")
-            .attr( 'value', index )
-            .text( region )
-          optgroup.append option
-
-      @$el.find("select#bioregions").append optgroup
-
-  changeBioregion: (e) =>
-    e.preventDefault()
-    selectedBioregion = $(e.target).find(":selected")
-    if selectedBioregion.val() == "-1"
-      @app.vent.trigger "bioregion:change", null
-    else
-      @app.vent.trigger "bioregion:change", 
-        country: @model.get('country')
-        province: @model.get('province')
-        bioregion: selectedBioregion.text()
+  changeBioregion: =>
+    @bioregion = @$('select').find(":selected").val()
+    @bioregion = null if @bioregion == "-1"
+    @app.vent.trigger "bioregion:change", 
+      country: @country.code
+      subdivision: @subdivision.code
+      bioregion: @bioregion
 
