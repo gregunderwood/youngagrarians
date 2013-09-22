@@ -35,14 +35,15 @@ class Youngagrarians.Views.MapMarker extends Backbone.Marionette.ItemView
 
       _model = @model
       _this = @
+      
+      
       $.goMap.createListener(
         { type: 'marker', marker: @marker.id },
         'click',
         () ->
-          if not _.isUndefined( window.infoBubble ) and not _.isNull( window.infoBubble )
-            window.infoBubble.close()
-
-
+          
+          window.infoBubble.close() if not _.isUndefined(window.infoBubble) and not _.isNull(window.infoBubble)
+          map = $.goMap.getMap()
           _infoBub = new InfoBubble
             disableAnimation: true
             maxWidth: YA.newMapWidth * 0.8
@@ -51,9 +52,20 @@ class Youngagrarians.Views.MapMarker extends Backbone.Marionette.ItemView
             content: content
             backgroundClassName: 'map-bubble-background'
             borderRadius: 0
-
-          _infoBub.open $.goMap.getMap(), @
-
+          _infoBub.open map, @
+          
+          google.maps.event.addListener _infoBub,'closeclick', =>
+            map.setOptions
+              zoomControl: true
+              panControl: true
+              mapTypeControl: true
+          
+          map.setOptions
+            zoomControl:false
+            panControl:false
+            mapTypeControl: false
+          window.infoBubble = _infoBub            
+          
           func = () =>
             if !_.isUndefined window.twttr
               text = _model.get('name')
@@ -79,10 +91,7 @@ class Youngagrarians.Views.MapMarker extends Backbone.Marionette.ItemView
               }
 
               FB.ui data, (response) ->
-                console.log 'response: ', response
-
-          _.delay func, 200
-          window.infoBubble = _infoBub
+                console.log 'response: ', response          
       )
     @marker
 
