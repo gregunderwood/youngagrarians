@@ -3,21 +3,14 @@ class Youngagrarians.Views.About extends Backbone.Marionette.View
   className: 'thing'
 
   events:
-    'click button.btn-warning'    : 'close'
+    'click .close'    : 'close'
 
   initialize: (options) =>
     _.bindAll @, 'render', 'close'
 
   render: =>
     @$el.html JST[ @template ] {}
-
-    @delegateEvents()
-    $("body #modal").html @el
-
-    @$el.find("div.modal.hide.fade").modal 'show'
+    $("#app-modal").html @el
 
   close: (e) =>
-    e.preventDefault()
-    @$el.find("div.modal.hide.fade").modal 'hide'
-    _.defer() =>
-      @$el.remove()
+    @$('a.close-reveal-modal').trigger('click')

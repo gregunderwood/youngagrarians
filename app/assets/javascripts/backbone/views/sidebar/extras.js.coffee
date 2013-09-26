@@ -1,6 +1,5 @@
 class Youngagrarians.Views.Extras extends Backbone.Marionette.ItemView
   template: "backbone/templates/sidebar/extras"
-
   className: "extras"
 
   events:

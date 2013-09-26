@@ -107,11 +107,14 @@
   }
 }
 
-#modal {
-   div.modal {
-      width: 600px;
-   }
+#app-modal {
+   ul {
+        list-style-type: none;
+      }
    form#add-to-map-form {
+      
+      
+      
       label {
          margin-left: -20px;
          margin-right: 10px;

@@ -3,7 +3,7 @@ class Youngagrarians.Views.AddLocation extends Backbone.Marionette.View
   className: 'thing'
 
   events:
-    'click button.btn-warning'    : 'cancelAdd'
+    'click .cancel'    : 'cancelAdd'
     'submit form#add-to-map-form' : 'submitForm'
     'change select#category' : 'updateSubcategories'
 
@@ -13,21 +13,12 @@ class Youngagrarians.Views.AddLocation extends Backbone.Marionette.View
   render: =>
     @$el.html JST[ @template ] @model.toJSON()
 
-    @delegateEvents()
-    $("body #modal").html @el
+    #@delegateEvents()
+    $("#app-modal").html @el
+    
+    #debugger
+    @$el.foundation('reveal', 'open')
 
-    @$el.find("div.modal.hide.fade").modal 'show'
-
-    select = $("select#category")
-    select.append $("<option>")
-      .attr("value", -1)
-      .html 'Select A Category'
-
-    window.Categories.each (model) =>
-      opt = $("<option>")
-        .attr( 'value', model.get('id'))
-        .html model.get('name')
-      select.append opt
 
   updateSubcategories: (e) =>
     id = parseInt $(e.target).val()
@@ -45,14 +36,8 @@ class Youngagrarians.Views.AddLocation extends Backbone.Marionette.View
             .attr( 'value', model.get("id") )
             .html( model.get( 'name' ) )
 
-
-
   cancelAdd: (e) =>
-    e.preventDefault()
-    @$el.find("div.modal.hide.fade").modal 'hide'
-    _.defer () =>
-      @$el.remove()
-    true
+    @$('a.close-reveal-modal').trigger('click')
 
   submitForm: (e) =>
     e.preventDefault()
