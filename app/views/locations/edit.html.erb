@@ -61,11 +61,11 @@
 					</div>
 
 					<div class="control-group">
-						<%= ff.label :subcategory, :class => "control-label" %>
+						<%= ff.label :subcategories, :class => "control-label" %>
 						<div class="controls">
-							<% selected = location.subcategory.collect { |sc| sc.id } %>
+							<% selected = location.subcategories.collect { |sc| sc.id } %>
 							<select class="subcategory" multiple>
-								<% location.category.subcategory.each do |sc| %>
+								<% location.category.subcategories.each do |sc| %>
 								<!-- <%= sc.name %> -->
 								<% if selected.include? sc.id %>
 								<option value="<%= sc.id %>" selected="selected"><%= sc.name %></option>

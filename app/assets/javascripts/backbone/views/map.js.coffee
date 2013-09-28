@@ -3,40 +3,6 @@ class Youngagrarians.Views.Map extends Backbone.Marionette.CompositeView
   itemView: Youngagrarians.Views.MapMarker
   map: null
 
-  country: null
-  province: null
-  provinceSelector: 'bc'
-  bioregion: null
-  bioregionSelector: null
-  category: null
-  subcategory: null
-
-  bioregionAreas:
-    'bc':
-      'northeast':
-        #where the map should center when this bioregion is chosen
-        zoomCenter: '57.996455,-123.442383'
-        #the outline of the shape for this bioregion
-        zoomLevel: 6
-      'skeena-north-coast':
-        zoomCenter: '56.096556,-130.517578'
-        zoomLevel: 6
-      'vancouver-island-coast':
-        zoomCenter: '49.75288,-126.079102'
-        zoomLevel: 7
-      'caribo-prince-george':
-        zoomCenter: '52.816043,-121.179199'
-        zoomLevel: 7
-      'thompson-okanagan':
-        zoomCenter: '50.625073,-118.520508'
-        zoomLevel: 8
-      'lower-mainland-southwest':
-        zoomCenter: '49.239121,-122.629395'
-        zoomLevel: 9
-      'kootenay':
-        zoomCenter: '49.582226,-116.608887'
-        zoomLevel: 8
-
   collectionEvents:
     'reset' : 'addMarkers'
 
@@ -47,14 +13,29 @@ class Youngagrarians.Views.Map extends Backbone.Marionette.CompositeView
   updateMap: =>
     $.goMap.clearMarkers()
     markers = new Backbone.Collection()
-    bounds = new google.maps.LatLngBounds()
+    map = $.goMap.getMap()    
     @collection.each (location)=>
-      markers.add new Youngagrarians.Views.MapMarker
-        model: location
-      if location.lat() and location.lng()
-        coords = new google.maps.LatLng(location.lat(), location.lng())
-        bounds.extend coords    
-    $.goMap.getMap().fitBounds(bounds) if markers.length > 0
+        markers.add new Youngagrarians.Views.MapMarker
+          model: location
+    if @collection.currentBioregion
+      map.setCenter new google.maps.LatLng(@collection.currentBioregion.center.latitude, @collection.currentBioregion.center.longitude)
+      map.setZoom @collection.currentBioregion.zoom      
+    else if @collection.currentSubdivision
+      bounds = new google.maps.LatLngBounds()
+      bounds.extend new google.maps.LatLng(@collection.currentSubdivision.bounds.south, @collection.currentSubdivision.bounds.east)
+      bounds.extend new google.maps.LatLng(@collection.currentSubdivision.bounds.north, @collection.currentSubdivision.bounds.west)
+      map.fitBounds(bounds)
+    else
+      bounds = new google.maps.LatLngBounds()
+      @collection.each (location)=>
+        if location.lat() and location.lng()
+          coords = new google.maps.LatLng(location.lat(), location.lng())
+          bounds.extend coords
+      if markers.length > 0
+        map.fitBounds(bounds)
+        map.setZoom 9 if markers.length == 1
+      else
+        map.fitBounds(Youngagrarians.Constants.DEFAULT_BOUNDS())
 
   addMarkers: (col) =>
     _.defer =>

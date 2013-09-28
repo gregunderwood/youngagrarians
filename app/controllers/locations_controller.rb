@@ -114,7 +114,7 @@ class LocationsController < ApplicationController
         if not newaddress.nil?
           address = newaddress[0]
         end
-        # do things at your leeeisurrree
+        
         l = Location.new(:resource_type => row[0] ||= '',
                          :name => row[3] ||= '',
                          :bioregion => row[4] ||= '',
@@ -124,15 +124,16 @@ class LocationsController < ApplicationController
                          :fb_url => row[8] ||= '',
                          :twitter_url => row[9] ||= '',
                          :description => row[10] ||= '',
-                         :content => row[11] ||= '',
-                         :email => row[12] ||= '',
+                         :email => row[11] ||= '',
+                         :province_code => row[12],
+                         :country_code => row[13],
                          :is_approved => 1 )
         if not cat.nil?
           l.category_id = cat.id
         end
 
         if not subcats.nil?
-          l.subcategory = subcats
+          l.subcategories = subcats
         end
 
         l.save

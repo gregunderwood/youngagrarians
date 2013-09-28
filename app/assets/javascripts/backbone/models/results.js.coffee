@@ -34,8 +34,8 @@ class Youngagrarians.Collections.ResultsCollection extends Backbone.Collection
     
   changeRegion: (options)=>
     stateChanged = !(options.subdivision == @currentSubdivision and options.bioregion == @currentBioregion)
-    @currentSubdivision = options.subdivision
-    @currentBioregion = options.bioregion 
+    @currentSubdivision = @locations.getSubdivision options.country, options.subdivision
+    @currentBioregion = @locations.getBioregion options.country, options.subdivision, options.bioregion 
     @update() if stateChanged
   
   search: (options)=>
@@ -54,7 +54,7 @@ class Youngagrarians.Collections.ResultsCollection extends Backbone.Collection
     if @searchLocations
       @searchLocations = null
       @update()
-    
+   
   update: =>
     locations = []
     @selectedCategories.each (category)=>
@@ -66,10 +66,10 @@ class Youngagrarians.Collections.ResultsCollection extends Backbone.Collection
           subcategory.id == s.id    
     if @currentSubdivision
       locations = _.filter locations, (location)=>
-        location.get('province_code') == @currentSubdivision
+        location.get('province_code') == @currentSubdivision.code
     if @currentBioregion
       locations = _.filter locations, (location)=>
-        location.get('bioregion') == @currentBioregion
+        location.get('bioregion') == @currentBioregion.name
     if @searchLocations
       locations = _.filter locations, (location)=>
         _.contains @searchLocations, location.id

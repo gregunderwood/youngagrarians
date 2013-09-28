@@ -36,14 +36,14 @@
 		</tr>
 
 		<% @locations.each do |location| %>
-		<% unless location.blank? %>
+		
 		<tr class="row">
 			<td class="span1"><%= check_box_tag '', location.id, false, :class => 'id'  %></td>
 			<td class="span2"><%= link_to location.name, location %></td>
 			<td class="span2"><%= location.address %></td>
-			<td class="span2"><%= location.category.name %></td>
+			<% if location.category %><td class="span2"><%= location.category.name %></td><% end %>
 			<td class="span2">
-				<% location.subcategory.each do |sc| %>
+				<% location.subcategories.each do |sc| %>
 				<%= sc.name %>,
 				<% end %>
 			</td>
@@ -53,7 +53,7 @@
 				<%= link_to 'Destroy', location, :method => :delete, :data => { :confirm => 'Are you sure?' } %>
 			</td>
 		</tr>
-		<% end %>
+		
 		<% end %>
 	</table>
 	<% end %>
