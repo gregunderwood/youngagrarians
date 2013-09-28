@@ -10,6 +10,8 @@ class Youngagrarians.Collections.ResultsCollection extends Backbone.Collection
     @selectedSubcategories = new Backbone.Collection()
     
   addCategory: (category)=>    
+    @selectedCategories.reset([])
+    @selectedSubcategories.reset([])
     @selectedCategories.add category
     category.get('subcategories').each (subcategory)=>
       subcategory = @selectedSubcategories.find (sub)->
@@ -22,9 +24,9 @@ class Youngagrarians.Collections.ResultsCollection extends Backbone.Collection
     @update()
   
   addSubcategory: (subcategory)=>
+    @selectedCategories.reset([])
     category = @selectedCategories.find (cat)->
       cat.id == subcategory.get('category_id')
-    @selectedCategories.remove category if category
     @selectedSubcategories.add subcategory
     @update()
   
