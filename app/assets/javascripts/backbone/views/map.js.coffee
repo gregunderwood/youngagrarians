@@ -44,13 +44,34 @@ class Youngagrarians.Views.Map extends Backbone.Marionette.CompositeView
 
   onShow: () =>
     @show = []
+    map_style = [{
+      stylers: [
+        { saturation: -100 }
+        { lightness: 16 }
+      ]
+    },{
+      featureType: "road.arterial"
+      stylers: [
+        { lightness: -6 }
+      ]
+    },{
+      featureType: "road.local"
+      elementType: "geometry.stroke"
+      stylers: [
+        { lightness: 15 }
+      ]
+    }]
     @map = $("#map").goMap
       latitude: 54.826008
       longitude: -125.200195
       zoom: 5
       maptype: 'ROADMAP'
       scrollwheel: false
-
+    
+    @map = $.goMap.getMap() 
+    @map.setOptions 
+      styles: map_style
+      
     $.goMap.createListener(
       'map'
       'zoom_changed'
