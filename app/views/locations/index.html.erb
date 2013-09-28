@@ -10,24 +10,25 @@
 <div id="locations-admin-list">
 	<%= form_for :locations_update, :html => { :id => 'locations-form' } do |f| %>
 	<%= f.hidden_field 'submit_type' %>
-
-	<ul id="form-actions" class="unstyled inline">
-		<li>
-			<button class="btn btn-mini" id="edit-all" type="submit" value="edit">Edit Selected</button><br/>
-		</li>
-		<li>
-			<button class="btn btn-mini" id="delete-all" type="submit" value="delete">Delete Selected</button>
-		</li>
-		<li>
-			<button class="btn btn-mini" id="approve-all" type="submit" value="approve">Approve Selected</button>
-		</li>
-	</ul>
-
+  <ul id="form-actions" class="unstyled inline">
+    <li>
+      <button class="btn btn-mini" id="edit-all" type="submit" value="edit">Edit Selected</button><br/>
+    </li>
+    <li>
+      <button class="btn btn-mini" id="delete-all" type="submit" value="delete">Delete Selected</button>
+    </li>
+    <li>
+      <button class="btn btn-mini" id="approve-all" type="submit" value="approve">Approve Selected</button>
+    </li>
+  </ul>
 	<table class="container">
-		<tr class="row">
+		<tr>
 			<th></th>
 			<th>Name</th>
 			<th>Address</th>
+			<th>Bioregion</th>
+			<th>Province</th>
+			<th>Country</th>
 			<th>Category</th>
 			<th>Sub Category</th>
 			<th>Is Approved</th>
@@ -37,10 +38,14 @@
 
 		<% @locations.each do |location| %>
 		
-		<tr class="row">
+		<tr>
 			<td class="span1"><%= check_box_tag '', location.id, false, :class => 'id'  %></td>
 			<td class="span2"><%= link_to location.name, location %></td>
 			<td class="span2"><%= location.address %></td>
+			<td class="span2"><%= location.bioregion %></td>
+			<td class="span2"><%= location.province_code %></td>
+			<td class="span2"><%= location.country_code %></td>
+			
 			<% if location.category %><td class="span2"><%= location.category.name %></td><% end %>
 			<td class="span2">
 				<% location.subcategories.each do |sc| %>

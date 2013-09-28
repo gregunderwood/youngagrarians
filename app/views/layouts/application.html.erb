@@ -78,16 +78,19 @@
       <div class="large-10 columns">
         <div id="map"></div>
         <div class='row' id="results">
-          <%= yield %>
         </div>        
       </div>
       <div id="sidebar" class="large-2 columns"></div>
     </div>
 
+    <% else %>
+
+    <div class='row' id='results'>
+      <%= yield %>
+    </div>
+
     <% end %>
-
     
-
     <div class="row">
       <footer>
         <p>
