@@ -1,7 +1,8 @@
+.row {min-width:100% !important; }
+
 #map {
    height: 560px;
    min-height: 400px;
-   width: 75%;
    min-width: 300px;
    /* Bootstrap Css Map Fix*/
   img { 
@@ -38,7 +39,7 @@
     a#map-search-clear {
       position: absolute;
       top: 54px;
-      left: 160px;
+      left: 150px;
       cursor: pointer;
     }
     

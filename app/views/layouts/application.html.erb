@@ -75,15 +75,18 @@
     <% if @hide_map.nil? %>
 
     <div class="row">
-      <div id="map" class="large-9 columns"></div>
-      <div id="sidebar" class="large-3 columns"></div>
+      <div class="large-10 columns">
+        <div id="map"></div>
+        <div class='row' id="results">
+          <%= yield %>
+        </div>        
+      </div>
+      <div id="sidebar" class="large-2 columns"></div>
     </div>
 
     <% end %>
 
-    <div class='row' id="results">
-      <%= yield %>
-    </div>
+    
 
     <div class="row">
       <footer>
