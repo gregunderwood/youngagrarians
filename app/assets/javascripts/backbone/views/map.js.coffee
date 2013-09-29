@@ -68,8 +68,8 @@ class Youngagrarians.Views.Map extends Backbone.Marionette.CompositeView
       scrollwheel: false
     
     @map = $.goMap.getMap() 
-    @map.setOptions 
-      styles: map_style
+    #@map.setOptions 
+    #  styles: map_style
       
     $.goMap.createListener(
       'map'
