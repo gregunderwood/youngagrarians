@@ -1,5 +1,5 @@
 .project
-.DS_STORE
+.DS_Store
 *.rbc
 *.sassc
 .sass-cache
