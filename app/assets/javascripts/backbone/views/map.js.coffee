@@ -11,6 +11,7 @@ class Youngagrarians.Views.Map extends Backbone.Marionette.CompositeView
     @collection.on 'reset', @updateMap
 
   updateMap: =>
+    window.infoBubble.close() if window.infoBubble
     $.goMap.clearMarkers()
     markers = new Backbone.Collection()        
     @collection.each (location)=>
