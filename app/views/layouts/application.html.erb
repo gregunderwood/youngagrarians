@@ -55,34 +55,87 @@
           fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
     </script>
+    <div class="topbar"></div>
+    <header id="masthead" class="site-header" role="banner">
+      <div class="banner">
+        <div class="logo">
+          <a class="home-link" href="http://ya.2bluesolutions.ca/" title="Young Agrarians" rel="home"> <img src="http://ya.2bluesolutions.ca/wp-content/themes/youngagrarians/img/young-agrarians-logo.jpg"> </a>
+        </div>
+        <div class="top-buttons">
+          <div class="u-map"><img class="alignnone size-full wp-image-2372" alt="u-map" src="http://ya.2bluesolutions.ca/wp-content/uploads/2013/09/u-map.jpg" width="116" height="87">
+            <h5>U-MAP</h5>
+            <h6>FARM RESOURCES</h6>
+          </div>
+          <div class="sign-up"><img class="alignnone size-full wp-image-2374" alt="sign-up" src="http://ya.2bluesolutions.ca/wp-content/uploads/2013/09/sign-up.jpg" width="94" height="87">
+            <h5>SIGN UP</h5>
+            <h6>FOR OUR NEWSLETTER</h6>
+          </div>
+          <div class="donate"><img class="alignnone size-full wp-image-2373" alt="donate" src="http://ya.2bluesolutions.ca/wp-content/uploads/2013/09/donate.jpg" width="68" height="87">
+            <h5>DONATE</h5>
+            <h6>HELP US GROW</h6>
+          </div>
 
-    
-      <div class="row">
-        <div class="navbar navbar-inverse" id="ya-nav">
-          <div class="navbar-inner">
-            <div class="nav-collapse collapse">
-              <p class="nav navbar-text pull-right">
-                <% if authenticated? %>
-                Welcome <%= current_user.username %> &nbsp;&nbsp;&nbsp;
-                <%= link_to 'Locations', { :controller => "locations", :action => "index" }, :class => "navbar-link" %>
-                <%= link_to 'Logout', { :controller => "accounts", :action => "logout"}, :class => "navbar-link" %>
-                <% end %>
-              </p>
-            </div>
+        </div>
+      </div>
+      <div id="navbar" class="navbar">
+        <nav id="site-navigation" class="navigation main-navigation" role="navigation">
+          <div class="menu-main-menu-container">
+            <ul id="menu-main-menu" class="nav-menu">
+              <li id="menu-item-29" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-29">
+                <a href="http://ya.2bluesolutions.ca/?page_id=7">About</a>
+              </li>
+              <li id="menu-item-28" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-28">
+                <a href="http://ya.2bluesolutions.ca/?page_id=9">Tools</a>
+              </li>
+              <li id="menu-item-27" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27">
+                <a href="http://ya.2bluesolutions.ca/?page_id=11">Media Farm</a>
+              </li>
+              <li id="menu-item-26" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-26">
+                <a href="http://ya.2bluesolutions.ca/?page_id=13">Build Community</a>
+              </li>
+              <li id="menu-item-25" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-25">
+                <a href="http://ya.2bluesolutions.ca/?page_id=15">Events</a>
+              </li>
+              <li id="menu-item-24" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-24">
+                <a href="http://ya.2bluesolutions.ca/?page_id=17">Land</a>
+              </li>
+              <li id="menu-item-23" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-23">
+                <a href="http://ya.2bluesolutions.ca/?page_id=19">Contact Us</a>
+              </li>
+            </ul>
+          </div>
+        </nav><!-- #site-navigation -->
+      </div><!-- #navbar -->
+    </header>
+
+    <% if authenticated? %>
+    <div class="row">
+      <div class="navbar navbar-inverse" id="ya-nav">
+        <div class="navbar-inner">
+          <div class="nav-collapse collapse">
+            <p class="nav navbar-text pull-right">
+
+              Welcome <%= current_user.username %> &nbsp;&nbsp;&nbsp;
+              <%= link_to 'Locations', { :controller => "locations", :action => "index" }, :class => "navbar-link" %>
+              <%= link_to 'Logout', { :controller => "accounts", :action => "logout"}, :class => "navbar-link" %>
+
+            </p>
           </div>
         </div>
       </div>
-    
-    <% if @hide_map.nil? %>
-    
-    <div id='map-app-container'>
-    <div class="row">
-      <div class="large-10 columns">
-        <div id="map"></div>
-        <div class='row' id="results"></div>
-      </div>
-      <div id="sidebar" class="large-2 columns"></div>
     </div>
+    <% end %>
+
+    <% if @hide_map.nil? %>
+
+    <div id='map-app-container'>
+      <div class="row">
+        <div class="large-10 columns">
+          <div id="map"></div>
+          <div class='row' id="results"></div>
+        </div>
+        <div id="sidebar" class="large-2 columns"></div>
+      </div>
     </div>
     <% else %>
 
@@ -92,14 +145,68 @@
 
     <% end %>
 
-    <div class="row">
-      <footer>
-        <p>
-          <em>&copy; Young Agrarians 2013</em> · Growing the next generations of farmers and food lovers in Canada!
-        </p>
-      </footer>
-    </div>
+    <footer id="FOOTER_1" class="site-footer">
+      <div id="DIV_2" class="sidebar-container">
+        <div class="widget-area" id="DIV_3">
+          <aside id="ASIDE_4" class="widget widget_text">
+            <div class="textwidget" id="DIV_5">
+              In partnership with:<img src="http://ya.2bluesolutions.ca/wp-content/uploads/2013/09/farm-folk.jpg" width="182px" height="157px" id="IMG_6" alt='' />
+            </div>
+          </aside>
+          <aside id="ASIDE_7" class="widget widget_nav_menu">
+            <div class="menu-main-menu-container" id="DIV_8">
+              <ul id="UL_9" class="menu">
+                <li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-7 current_page_item menu-item-29" id="LI_10">
+                  <a href="http://ya.2bluesolutions.ca/?page_id=7" id="A_11">About</a>
+                  <ul class="sub-menu" id="UL_12">
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2382" id="LI_13">
+                      <a href="http://ya.2bluesolutions.ca/?page_id=2376" id="A_14">Network</a>
+                    </li>
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2381" id="LI_15">
+                      <a href="http://ya.2bluesolutions.ca/?page_id=2378" id="A_16">Funders</a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-28" id="LI_17">
+                  <a href="http://ya.2bluesolutions.ca/?page_id=9" id="A_18">Tools</a>
+                </li>
+                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27" id="LI_19">
+                  <a href="http://ya.2bluesolutions.ca/?page_id=11" id="A_20">Media Farm</a>
+                </li>
+                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-26" id="LI_21">
+                  <a href="http://ya.2bluesolutions.ca/?page_id=13" id="A_22">Build Community</a>
+                </li>
+                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-25" id="LI_23">
+                  <a href="http://ya.2bluesolutions.ca/?page_id=15" id="A_24">Events</a>
+                </li>
+                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-24" id="LI_25">
+                  <a href="http://ya.2bluesolutions.ca/?page_id=17" id="A_26">Land</a>
+                </li>
+                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-23" id="LI_27">
+                  <a href="http://ya.2bluesolutions.ca/?page_id=19" id="A_28">Contact Us</a>
+                </li>
+              </ul>
+            </div>
+          </aside>
+          <aside id="ASIDE_29" class="widget widget_text">
+            <div class="textwidget" id="DIV_30">
+              <img src="http://ya.2bluesolutions.ca/wp-content/uploads/2013/09/u-map-footer.jpg" width="215px" height="160px" id="IMG_31" alt='' />
+            </div>
+          </aside>
+        </div>
+        <!-- .widget-area -->
 
+      </div>
+      <!-- #secondary -->
+
+      <div class="site-info" id="DIV_32">
+        <p id="P_33">
+          copyright © 2013 Young Agrarians
+        </p>
+      </div>
+      <!-- .site-info -->
+
+    </footer>
     <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?libraries=places&sensor=false&key=AIzaSyBHgtGfgc3ozIAf7I0ZoL-AYD7oW3NvqKE" %>
     <script type="text/javascript">
       var script = '<script type="text/javascript" src="http://google-maps-' + 'utility-library-v3.googlecode.com/svn/trunk/infobubble/src/infobubble';
