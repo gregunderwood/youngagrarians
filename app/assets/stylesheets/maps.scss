@@ -213,8 +213,6 @@ ul.nav-menu li:hover > ul,
 
 /* navigation */
 
-
-
 .navbar {
 
         background-color:rgb(25,25,25);
@@ -224,11 +222,6 @@ ul.nav-menu li:hover > ul,
         max-width: none;
 
         width: 100%;
-
-
-
-
-
 }
 
 .main-navigation {
@@ -309,6 +302,8 @@ h3.menu-toggle{
 
 
 #map-app-container {
+  margin-top: 10px;
+  
   .row {
     min-width:100% !important; 
   }
