@@ -1,4 +1,8 @@
-.row {min-width:100% !important; }
+#map-app-container {
+  .row {
+    min-width:100% !important; 
+  }
+}
 
 #map {
    height: 560px;

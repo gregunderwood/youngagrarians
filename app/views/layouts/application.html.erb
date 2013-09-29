@@ -55,42 +55,43 @@
           fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
     </script>
+
     
-    <div class="row">
-      <div class="navbar navbar-inverse" id="ya-nav">
-        <div class="navbar-inner">
-          <div class="nav-collapse collapse">
-            <p class="nav navbar-text pull-right">
-              <% if authenticated? %>
-              Welcome <%= current_user.username %> &nbsp;&nbsp;&nbsp;
-              <%= link_to 'Locations', { :controller => "locations", :action => "index" }, :class => "navbar-link" %>
-              <%= link_to 'Logout', { :controller => "accounts", :action => "logout"}, :class => "navbar-link" %>
-              <% end %>
-            </p>
+      <div class="row">
+        <div class="navbar navbar-inverse" id="ya-nav">
+          <div class="navbar-inner">
+            <div class="nav-collapse collapse">
+              <p class="nav navbar-text pull-right">
+                <% if authenticated? %>
+                Welcome <%= current_user.username %> &nbsp;&nbsp;&nbsp;
+                <%= link_to 'Locations', { :controller => "locations", :action => "index" }, :class => "navbar-link" %>
+                <%= link_to 'Logout', { :controller => "accounts", :action => "logout"}, :class => "navbar-link" %>
+                <% end %>
+              </p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-
+    
     <% if @hide_map.nil? %>
-
+    
+    <div id='map-app-container'>
     <div class="row">
       <div class="large-10 columns">
         <div id="map"></div>
-        <div class='row' id="results">
-        </div>        
+        <div class='row' id="results"></div>
       </div>
       <div id="sidebar" class="large-2 columns"></div>
     </div>
-
+    </div>
     <% else %>
 
-    <div class='row' id='results'>
+    <div class='row'>
       <%= yield %>
     </div>
 
     <% end %>
-    
+
     <div class="row">
       <footer>
         <p>
@@ -101,15 +102,14 @@
 
     <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?libraries=places&sensor=false&key=AIzaSyBHgtGfgc3ozIAf7I0ZoL-AYD7oW3NvqKE" %>
     <script type="text/javascript">
-      var script = '<script type="text/javascript" src="http://google-maps-' +
-          'utility-library-v3.googlecode.com/svn/trunk/infobubble/src/infobubble';
+      var script = '<script type="text/javascript" src="http://google-maps-' + 'utility-library-v3.googlecode.com/svn/trunk/infobubble/src/infobubble';
       if (document.location.search.indexOf('compiled') !== -1) {
         script += '-compiled';
       }
       script += '.js"><' + '/script>';
       document.write(script);
     </script>
-    
+
     <script>
       window.fbAsyncInit = function() {
         // init the FB JS SDK
