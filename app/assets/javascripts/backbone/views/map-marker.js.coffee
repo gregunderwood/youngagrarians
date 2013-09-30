@@ -9,7 +9,7 @@ class Youngagrarians.Views.MapMarker extends Backbone.Marionette.ItemView
     data.link = encodeURIComponent @model.locUrl()
 
     category = @model.get('category').get('name')
-    icon = @model.get('category').getIcon()
+    icon = @model.get('category').getMapIcon()
 
     data.category_name = category
     data.category_icon = icon

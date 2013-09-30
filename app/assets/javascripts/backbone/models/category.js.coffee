@@ -17,6 +17,9 @@ class Youngagrarians.Models.Category extends Backbone.RelationalModel
 
   getIcon: =>
     return '/~youngagr/map/assets/map-icons/' + @get('name').toLowerCase().replace(' ', '-') + ".png"
+  
+  getMapIcon: =>
+    return '/~youngagr/map/assets/map-icons/' + @get('name').toLowerCase().replace(' ', '-') + "-map.png"
 
   removeEvent: "category:remove"
 
