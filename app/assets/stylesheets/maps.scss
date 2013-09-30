@@ -15,8 +15,6 @@ font-family: 'Young Agrarians legible';
         src: local(''), url('/fonts/YOUNG_AGRARIANS.woff') format('woff'), url('/fonts/YOUNG_AGRARIANS.ttf') format('truetype'), url('fonts/YOUNG_AGRARIANS.svg') format('svg');
 }
 
-
-
 *{
 
 -webkit-font-smoothing: antialiased;
@@ -252,6 +250,15 @@ div.map-bubble-background {
 
       }
    }
+}
+
+.gm-style div {
+  font-family: 'SofiaProLight', Georgia, "Times New Roman", Times, serif;
+  font-size: 14px;
+  height: auto;
+  ul {
+    list-style-type: none;
+  }
 }
 
 .reveal-modal {
