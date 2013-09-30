@@ -166,8 +166,45 @@ a:active, a:hover, .widget a:hover {
          }
 
          select {
-            width: 355px;
+            width: 340px;
          }
+         
+         input#location {
+           margin-bottom: 2px;
+         }
+         
+         input#show_until {
+           margin-bottom: 2px;
+         }
+         
+         
+      }
+      
+      .subcategory-selects {
+         width: 300px;
+         
+         i.icon-remove:first {
+           display: none;  
+         }
+         
+         .subcategory-select {
+           width: 285px;
+         }
+       }
+      
+      a#add-subcategory {
+        font-size: 12px;
+        float:right; 
+      } 
+      
+      a#add-subcategory:hover {
+        color: #2ba6cb; 
+      } 
+      
+       
+      .show-until-control {
+        width: 340px;
+        line-height: 12px;
       }
 
       .control-group.agree {

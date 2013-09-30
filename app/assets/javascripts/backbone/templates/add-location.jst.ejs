@@ -20,10 +20,11 @@
 						<label for="place" class="control-label">Address</label>
 						<div class="controls">
 							<input id="location" type="text" id="place" required
-										 placeholder="example: 150 West Hastings, Vancouver, BC" />
-							<br />
-							<small>Street number, street name, town/city, and province.<br />
-								Please make sure the address is searchable on Google Maps first!</small>
+										 placeholder="example: 150 West Hastings, Vancouver, BC" />							
+							<small>
+							  <div>Street number, street name, town/city, and province.</div>
+								<div>Please make sure the address is searchable on Google Maps first!</div>
+						</small>
 
 						</div>
 					</li>
@@ -43,25 +44,34 @@
 					</li>
 
 					<li class="control-group">
-						<label for="subcategory" class="control-label">Sub-Category</label>
-						<div class="controls">
-							<select id="subcategory" disabled="disabled" multiple></select>
+						<label for="subcategories" class="control-label">Sub-Categories</label>
+						<div class="controls subcategory-selects">
+							<select class='subcategory-select'></select>							
 						</div>
+						<div>
+						  <a id='add-subcategory' href='javascript: void(0);'>Add Sub-Category</a>
+						  <div style="clear:both;"
+						</div> 
 					</li>
-
+          
+          <li class="control-group">
+            <label for="country" class="control-label">Country</label>
+            <div class="controls">
+              <select id="country" required></select>
+            </div>
+          </li>
+          
+          <li class="control-group">
+            <label for="subdivision" class="control-label">Province</label>
+            <div class="controls">
+              <select id="subdivision" required></select>
+            </div>
+          </li>
+          
 					<li class="control-group">
 						<label for="bioregion" class="control-label">Bioregion</label>
 						<div class="controls">
-							<select id="bioregion" required>
-								<option value="-1">Select A Bioregion</option>
-								<option value="Caribou – Prince George">Caribou – Prince George</option>
-								<option value="Kootenays">Kootenays</option>
-								<option value="Lower Mainland">Lower Mainland</option>
-								<option value="North Coast – Skeena">North Coast – Skeena</option>
-								<option value="Northeast – Fort St. John, Dawson Creek">Northeast – Fort St. John, Dawson Creek</option>
-								<option value="Thompson – Okanagan">Thompson – Okanagan</option>
-								<option value="Vancouver Island – South Coast">Vancouver Island – South Coast</option>
-							</select>
+							<select id="bioregion" required></select>
 						</div>
 					</li>
 
@@ -109,9 +119,8 @@
 
 					<li class="control-group">
 						<label for="email" class="control-label">Show Until</label>
-						<div class="controls">
+						<div class="controls show-until-control">
 							<input type="date" id="show_until" placeholder="Enter a date here, ie '2013-01-01'" />
-							<br />
 							<small>
 								After this date, the location will no longer show up in the listings. Please enter it in the format 'DD/MM/YYYY'.
 							</small>
