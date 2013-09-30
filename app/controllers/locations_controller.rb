@@ -26,9 +26,9 @@ class LocationsController < ApplicationController
         @locations = []
 
         if @filtered
-          @locations = Location.where( :is_approved => 0 ).all
+          @locations = Location.where( :is_approved => 0 ).order(:name).all
         else
-          @locations = Location.all
+          @locations = Location.order(:name).all
         end
 
         @hide_map = true

@@ -29,6 +29,7 @@
 			<th>Bioregion</th>
 			<th>Province</th>
 			<th>Country</th>
+			<th>Type</th>
 			<th>Category</th>
 			<th>Sub Category</th>
 			<th>Is Approved</th>
@@ -45,6 +46,7 @@
 			<td class="span2"><%= location.bioregion %></td>
 			<td class="span2"><%= location.province_code %></td>
 			<td class="span2"><%= location.country_code %></td>
+			<td class="span2"><%= location.resource_type %></td>
 			
 			<% if location.category %><td class="span2"><%= location.category.name %></td><% end %>
 			<td class="span2">
