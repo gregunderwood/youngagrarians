@@ -27,8 +27,9 @@ class Location < ActiveRecord::Base
   def self.search(term, province = nil)
     results = []
     if not term.nil? and not term.empty?
-      category = Category.find_by_name term
-      subcategory = Category.find_by_name term
+      term = term.downcase
+      category = Category.where('LOWER(name) = ?', term).first
+      subcategory = Category.where('LOWER(name) = ?', term).first
       if category
         results += Location.where(:is_approved => true).where('category_id', category.id).all        
       end
@@ -37,8 +38,8 @@ class Location < ActiveRecord::Base
       end
       term = "%#{term}%"
       results += Location.where(:is_approved => true)
-        .where("name LIKE ? OR address LIKE ? OR postal LIKE ? OR content LIKE ? OR bioregion LIKE ? OR phone LIKE ? OR description LIKE ?", 
-               term, term, term, term, term, term, term).all 
+        .where("LOWER(name) LIKE ? OR LOWER(address) LIKE ? OR LOWER(postal) LIKE ? OR LOWER(bioregion) LIKE ? OR phone LIKE ? OR LOWER(description) LIKE ?", 
+               term, term, term, term, term, term).all 
     end
     return results.uniq
   end

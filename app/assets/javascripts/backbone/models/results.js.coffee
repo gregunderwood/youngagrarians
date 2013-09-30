@@ -65,7 +65,9 @@ class Youngagrarians.Collections.ResultsCollection extends Backbone.Collection
     @selectedSubcategories.each (subcategory)=>
       locations = _.union locations, @locations.filter (location)=>
         _.find location.get('subcategories'), (s)->
-          subcategory.id == s.id    
+          subcategory.id == s.id
+    if @selectedSubcategories and @selectedCategories and @searchLocations
+      locations = @locations.models
     if @currentSubdivision
       locations = _.filter locations, (location)=>
         location.get('province_code') == @currentSubdivision.code
@@ -75,5 +77,7 @@ class Youngagrarians.Collections.ResultsCollection extends Backbone.Collection
     if @searchLocations
       locations = _.filter locations, (location)=>
         _.contains @searchLocations, location.id
+    locations = _.sortBy locations, (location)->
+      location.get('name').toLowerCase() if location.get('name')
     @.reset _.uniq(locations)
 

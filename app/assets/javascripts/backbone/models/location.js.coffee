@@ -86,7 +86,7 @@ class Youngagrarians.Constants
     bounds = new google.maps.LatLngBounds()
     bounds.extend new google.maps.LatLng(49.000000, -114.072418)
     bounds.extend new google.maps.LatLng(60.001615, -139.062195)
-    map.fitBounds(bounds)
+    bounds
   
   @COUNTRIES:[{
     name: "Canada"
