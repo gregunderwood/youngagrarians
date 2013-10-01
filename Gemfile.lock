@@ -288,7 +288,7 @@ DEPENDENCIES
   sass-rails (~> 3.2.3)
   spreadsheet (~> 0.8.3)
   table_print (~> 1.0.0)
-  thin (~> 1.4.1)
+  thin
   uglifier (>= 1.0.3)
   warden (~> 1.2.1)
   yard (~> 0.8.5.2)

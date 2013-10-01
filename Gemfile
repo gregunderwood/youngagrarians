@@ -11,6 +11,7 @@ gem 'mysql2'
 gem 'ejs'
 # Gems used only for assets and not required
 # in production environments by default.
+gem 'thin'
 
 group :assets do
 	gem 'sass-rails',   '~> 3.2.3'
@@ -36,7 +37,6 @@ gem 'warden',                 '~> 1.2.1'
 
 group :development, :test do
 	gem 'rb-readline',					'~> 0.4.2'
-	gem 'thin',                 '~> 1.4.1'
 	gem 'quiet_assets'
 
 	gem 'randexp',              '~> 0.1.7'
