@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby "1.9.3"
 
 gem 'rails', '3.2.12'
 gem 'rake', '~> 10.0.4'
@@ -10,6 +11,7 @@ gem 'mysql2'
 gem 'ejs'
 # Gems used only for assets and not required
 # in production environments by default.
+
 group :assets do
 	gem 'sass-rails',   '~> 3.2.3'
 	gem 'coffee-rails', '~> 3.2.1'
@@ -17,8 +19,7 @@ group :assets do
   gem 'compass-rails' # you need this or you get an err
   gem 'zurb-foundation', '~> 4.0.0'
   gem 'font-awesome-rails'
-	gem 'eco'
-	
+	gem 'eco'	
 	gem 'marionette-rails'
 	gem 'haml'
 	gem 'sass'
