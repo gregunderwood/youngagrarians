@@ -16,10 +16,10 @@ class Youngagrarians.Models.Category extends Backbone.RelationalModel
   ]
 
   getIcon: =>
-    return '/~youngagr/map/assets/map-icons/' + @get('name').toLowerCase().replace(' ', '-') + ".png"
+    return '/images/map-icons/' + @get('name').toLowerCase().replace(' ', '-') + ".png"
   
   getMapIcon: =>
-    return '/~youngagr/map/assets/map-icons/' + @get('name').toLowerCase().replace(' ', '-') + "-map.png"
+    return '/images/map-icons/' + @get('name').toLowerCase().replace(' ', '-') + "-map.png"
 
   removeEvent: "category:remove"
 
@@ -27,7 +27,7 @@ Youngagrarians.Models.Category.setup()
 
 class Youngagrarians.Collections.CategoriesCollection extends Backbone.Collection
   model: Youngagrarians.Models.Category
-  url: '/~youngagr/map/categories'
+  url: '/categories'
 
   comparator: ( a, b ) =>
     aName = a.get('name')

@@ -42,7 +42,7 @@ class Youngagrarians.Collections.ResultsCollection extends Backbone.Collection
   
   search: (options)=>
     promise = $.ajax 
-      url: '/~youngagr/map/search'
+      url: '/search'
       type: 'POST'
       data: 
         term: options.term

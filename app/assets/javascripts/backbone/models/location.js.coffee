@@ -1,6 +1,6 @@
 class Youngagrarians.Models.Location extends Backbone.RelationalModel
   paramRoot: 'location'
-  url: '/~youngagr/map/locations'
+  url: '/locations'
 
   relations: [
     {
@@ -28,7 +28,7 @@ Youngagrarians.Models.Location.setup()
 
 class Youngagrarians.Collections.LocationsCollection extends Backbone.Collection
   model: Youngagrarians.Models.Location
-  url: '/~youngagr/map/locations'
+  url: '/locations'
 
   getSubdivision: (country_code, province_code)=>
     return null unless country_code and province_code
@@ -69,7 +69,7 @@ class Youngagrarians.Collections.LocationsCollection extends Backbone.Collection
             country = _.find result.address_components, (ac)->
               ac = _.find ac.types, (type)->
                 type == 'country'
-            loc.url = "/~youngagr/map/locations/#{loc.id}" 
+            loc.url = "/locations/#{loc.id}" 
             if province
               loc.set  
                 province_name: province.long_name

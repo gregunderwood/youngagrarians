@@ -64,7 +64,7 @@ class window.Admin
           if confirm 'Are you sure you want to delete all of these?'
             $.ajax
               type: "POST"
-              url: "/~youngagr/map/locations/" + ids.join(",") + "/multi-delete"
+              url: "/locations/" + ids.join(",") + "/multi-delete"
               data:
                 _method: "DELETE"
                 ids: ids
@@ -74,7 +74,7 @@ class window.Admin
         else if type == "approve"
           $.ajax
             type: "POST"
-            url: "/~youngagr/map/locations/" + ids.join(",") + "/approve"
+            url: "/locations/" + ids.join(",") + "/approve"
             data:
               ids: ids
             success: (data,status,xhr) ->
