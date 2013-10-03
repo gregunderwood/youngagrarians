@@ -1,5 +1,198 @@
 /* top */
 
+.site-header{ 
+  margin-top:5px;
+}
+
+.site-header .home-link {
+  max-width:none;
+  padding:0 0px;
+  margin:0 0;
+}
+
+.banner{
+  width:1024px;
+  margin-left:auto;
+  margin-right:auto;
+  height:135px;
+}
+
+.logo{
+  float:left;
+  height:129px;
+  width:270px;
+}
+
+.logo a.home-link{
+  background:url('http://youngagrarians.org/~youngagr/wp-content/themes/youngagrarians/img/young-agrarians-logo-bw.jpg') 0px 0 no-repeat;
+  height:129px;
+  width:270px;
+}
+
+.logo a:hover.home-link{
+  background-position: 0px -132px;
+}
+
+.site-header .home-link {
+  color: #141412;
+  display: block;
+  margin: 0 auto;
+  max-width: 1080px;
+  min-height: 230px;
+  padding: 0 20px;
+  text-decoration: none;
+  width: 100%;
+}
+.site-header .home-link {
+    min-height: 0;
+}
+
+ul.social {
+list-style: none;
+display:inline;
+margin:0px;
+padding:0px;
+}
+.social-icons{
+  float:right;
+
+
+}
+.icons{
+
+  width:140px;
+
+}
+.social li a {
+  float: left;
+  background-image: url('http://youngagrarians.org/~youngagr/wp-content/themes/youngagrarians/img/social-icons.jpg');
+  width: 43px;
+  height: 45px;
+  margin-left: 3px;
+  margin-bottom:2px;
+}
+.social li a.facebook {
+  background-position: 0px 0px;
+}
+.social li a.twitter {
+  background-position: 87px 0px;
+}
+.social li a.flickr {
+  background-position: 43px 0px;
+} 
+.social li a.instagram {
+  background-position: 0px -45px;
+}
+.social li a.google {
+  background-position: 87px -45px;
+}
+.social li a.mail {
+  background-position: 43px -45px;
+}
+
+.social li a:hover.facebook {
+  background-position: 0px -90px;
+}
+.social li a:hover.twitter {
+  background-position: 87px -90px;
+}
+.social li a:hover.flickr {
+  background-position: 43px -90px;
+} 
+.social li a:hover.instagram {
+  background-position: 0px 45px;
+}
+.social li a:hover.google {
+  background-position: 87px 45px;
+}
+.social li a:hover.mail {
+  background-position: 43px 45px;
+}
+
+.search-bar{
+  float:right;
+  margin-top:5px;
+}
+.search-bar input{
+  float:left;
+  border:none;
+}
+.search-bar input#search{
+  border:1px solid #999;
+  height:25px;
+  width:140px;
+    -webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;
+}
+
+.site-header .search-form {
+  position:relative;
+  top:0px;
+  right:0px;
+}
+
+.top-buttons{
+  margin-left:auto;
+  margin-right:auto;
+  width:700px;
+
+  padding-left:140px;
+}
+
+.u-map, .sign-up, .donate{
+  float:left;
+  text-align:center;
+  text-transform:uppercase;
+  margin-left:50px;
+
+}
+
+a.u-map{
+  background:url('http://youngagrarians.org/~youngagr/wp-content/themes/youngagrarians/img/u-map.jpg') 10px 0 no-repeat;
+  height:95px;
+  width:125px;
+}
+a.sign-up{
+  background:url('http://youngagrarians.org/~youngagr/wp-content/themes/youngagrarians/img/sign-up.jpg') 0px 0 no-repeat;
+  height:95px;
+  width:120px;
+}
+a.donate{
+  background:url('http://youngagrarians.org/~youngagr/wp-content/themes/youngagrarians/img/donate.jpg') 10px 0 no-repeat;
+  height:95px;
+  width:100px;
+}
+
+.top-buttons a:hover.u-map{
+  background-position: 10px -95px;
+}
+.top-buttons a:hover.sign-up{
+  background-position: 0px -95px;
+}
+.top-buttons a:hover.donate{
+  background-position: 10px -95px;
+}
+
+.top-buttons a p{
+  padding-top:95px;
+  text-transform:normal;
+  font-size:20px;
+  font-family: 'Young Agrarians legible';
+  font-weight:bold;
+  margin-bottom:0px;
+  margin-top:3px;
+  color:#000;
+  line-height:15px;
+}
+
+.top-buttons a p span.sub{
+  font-size:10px;
+  margin-top:-10px;
+  font-family: 'Averia Serif Libre', cursive;
+
+}
+
 /**
  * 4.2 Navigation
  * ----------------------------------------------------------------------------
@@ -95,173 +288,176 @@ ul.nav-menu li:hover > ul,
   width: 100%;
 }
 
-
-.topbar{
-
-        height:34px;
-
-        background-color:rgb(25,25,25);
-
-        width:100%;
-
+.site-header .search-form {
+  position: absolute;
+  right: 20px;
+  top: 1px;
 }
 
-.site-header{   
-
-        margin-top:25px;
-
+.site-header .search-field {
+  background-color: transparent;
+  background-image: url(images/search-icon.png);
+  background-position: 5px center;
+  background-repeat: no-repeat;
+  background-size: 24px 24px;
+  border: none;
+  cursor: pointer;
+  height: 37px;
+  margin: 3px 0;
+  padding: 0 0 0 34px;
+  position: relative;
+  -webkit-transition: width 400ms ease, background 400ms ease;
+  transition:         width 400ms ease, background 400ms ease;
+  width: 0;
 }
 
-.site-header .home-link {
-
-        max-width:none;
-
-}
-
-.banner{
-
-        width:1024px;
-
-        margin-left:auto;
-
-        margin-right:auto;
-
-        height:146px;
-
-}
-
-.logo{
-
-        float:left;
-
-}
-
-.top-buttons{
-
-        float:right;
-
-}
-
-.u-map, .sign-up, .donate{
-
-        float:left;
-
-        text-align:center;
-
-        text-transform:uppercase;
-
-        margin-right:50px;
-
-}
-
-.top-buttons h5, .top-buttons h6{
-
-        margin:0px;
-
-
-
-}
-
-.top-buttons h5{
-
-        font-size:20px;
-
-        
-
-        font-family: 'Young Agrarians legible';
-
-}
-
-.top-buttons h6{
-
-        font-size:10px;
-
+.site-header .search-field:focus {
+  background-color: #fff;
+  border: 2px solid #c3c0ab;
+  cursor: text;
+  outline: 0;
+  width: 230px;
 }
 
 /* navigation */
 
 .navbar {
+  background-color:rgb(25,25,25);
+  margin: 0 auto;
+  max-width: none;
+  width: 100%;
 
-        background-color:rgb(25,25,25);
 
-        margin: 0 auto;
-
-        max-width: none;
-
-        width: 100%;
 }
-
 .main-navigation {
-
-        clear: both;
-
-        margin: 0 auto;
-
-        max-width: 1024px;
-
-        min-height: 34px;
-
-        position: relative;
-
+  clear: both;
+  margin: 0 auto;
+  max-width: 1024px;
+  min-height: 34px;
+  position: relative;
 }
-
 ul.nav-menu{
-
-        padding:0 0 0 0 ;
-
-        text-align:center;
-
+  padding:0 0 0 0 ;
+  text-align:center;
 }
-
-.nav-menu li a {
-
+.nav-menu li a, .toggled-on .nav-menu li a {
 color: #FFF;
-
-padding:0 60px 0 0;
-
+padding:0 63px 0 0;
 line-height:35px;
-
 text-transform:uppercase;
-
 font-family:'Young Agrarians legible';
-
 font-size:24px;
-
 font-weight:bold;
-
 }
-
-
 
 .nav-menu li:last-child  a{
-
 padding:0 0 0 0;
-
 }
-
-.nav-menu li:hover > a, .nav-menu li a:hover {
-
+.nav-menu li:hover > a, .nav-menu li a:hover, .toggled-on .nav-menu li:hover > a, .toggled-on .nav-menu li a:hover {
 background-color:rgb(25,25,25);
-
 }
-
+.toggled-on .nav-menu li:hover > a,
+.toggled-on .nav-menu .children a {
+  background-color: none;
+    color:rgb(197,63,63);
+}
+  
 h3.menu-toggle{
-
-        color:#FFF;
-
+  color:#FFF;
 }
 
-
-
-.nav-menu .current_page_item > a, .nav-menu .current_page_ancestor > a, .nav-menu .current-menu-item > a, .nav-menu .current-menu-ancestor > a {
-
-        color:rgb(197,63,63);
-
-        font-style: normal;
-
+.nav-menu .current_page_item > a, .nav-menu .current_page_ancestor > a, .nav-menu .current-menu-item > a, .nav-menu .current-menu-ancestor > a, .toggled-on .nav-menu .current_page_item > a, .toggled-on .nav-menu .current_page_ancestor > a, .toggled-on .nav-menu .current-menu-item > a, .toggled-on .nav-menu .current-menu-ancestor > a {
+  color:rgb(197,63,63);
+  font-style: normal;
 }
-
 .nav-menu li:hover > a, .nav-menu li a:hover {
   color:rgb(197,63,63);
 }
+
+.toggled-on .nav-menu li > ul a {
+  color:#FFF;
+}
+
+.nav-menu .sub-menu{
+  border:none;
+  background-color:rgb(25,25,25);
+  text-align:left;
+  padding-left:10px;
+
+}
+
+ul.nav-menu ul a:hover{
+  background-color:rgb(25,25,25);
+}
+
+
+.paging-navigation {
+  background-color:#FFF;
+
+}
+.paging-navigation a {
+  font-family:'Young Agrarians legible';
+  font-size:22px;
+  text-transform:uppercase;
+  font-weight:700;
+  font-style:normal;
+  color:#000;
+}
+.paging-navigation a:hover {
+  color:rgb(197,63,63);
+}
+.paging-navigation .meta-nav {
+  background-color:#000;
+}
+.paging-navigation a:hover .meta-nav {
+  background-color:rgb(197,63,63);
+}
+.sidebar .paging-navigation .nav-links {
+  padding:0 0 0 0;
+}
+
+.sidebar .post-navigation .nav-links{
+  padding:0 0 0 0;
+}
+.sidebar .post-navigation .nav-links a{
+  font-family:'Young Agrarians legible';
+  font-size:22px;
+  text-transform:uppercase;
+  font-weight:700;
+  font-style:normal;
+  color:#000;
+}
+.sidebar .post-navigation .nav-links a:hover{
+  color:rgb(197,63,63);
+}
+
+ul#menu-footer{
+  width:370px;
+  margin:0 auto;
+  font-family: 'Averia Serif Libre', cursive;
+  text-transform:uppercase;
+  font-size:16px;
+  padding-left:20px;
+}
+ul#menu-footer li{
+  width:170px;
+  float:left;
+
+}
+nav.toggled-on{
+  text-align:left;
+}
+nav.toggled-on ul.sub-menu{
+  text-align:left;
+
+}
+nav.toggled-on ul.sub-menu li a{
+padding: 0 0 0 0;
+
+}
+nav.toggled-on ul.sub-menu li:last-child a{
+text-align:left;
+
+}
+
 
