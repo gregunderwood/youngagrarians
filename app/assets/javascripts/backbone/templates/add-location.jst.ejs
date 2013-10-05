@@ -35,25 +35,7 @@
 							<input id="postal" type="text" id="place" required />
 						</div>
 					</li>
-
-					<li class="control-group">
-						<label for="category" class="control-label">Listing Category</label>
-						<div class="controls">
-							<select id="category" requried></select>
-						</div>
-					</li>
-
-					<li class="control-group">
-						<label for="subcategories" class="control-label">Sub-Categories</label>
-						<div class="controls subcategory-selects">
-							<select class='subcategory-select'></select>							
-						</div>
-						<div>
-						  <a id='add-subcategory' href='javascript: void(0);'>Add Sub-Category</a>
-						  <div style="clear:both;"
-						</div> 
-					</li>
-          
+					
           <li class="control-group">
             <label for="country" class="control-label">Country</label>
             <div class="controls">
@@ -61,19 +43,37 @@
             </div>
           </li>
           
-          <li class="control-group">
-            <label for="subdivision" class="control-label">Province</label>
+          <li id="subdivision-control-group" class="control-group">
+            <label id="subdivision-label" for="subdivision" class="control-label">Province</label>
             <div class="controls">
               <select id="subdivision" required></select>
             </div>
           </li>
           
+          <li id="bioregion-control-group" class="control-group">
+            <label for="bioregion" class="control-label">Bioregion</label>
+            <div class="controls">
+              <select id="bioregion" required></select>
+            </div>
+          </li>
+
 					<li class="control-group">
-						<label for="bioregion" class="control-label">Bioregion</label>
+						<label for="category" class="control-label">Listing Category</label>
 						<div class="controls">
-							<select id="bioregion" required></select>
+							<select id="category-select" requried></select>
 						</div>
 					</li>
+
+					<li id="subcategories-control-group" class="control-group">
+						<label for="subcategories" class="control-label">Sub-Categories</label>
+						<div id="subcategory-selects" class="controls">
+														
+						</div>
+						<div>
+						  <a id='add-subcategory' href='javascript: void(0);'>Add Sub-Category</a>
+						  <div style="clear:both;"
+						</div> 
+					</li>          
 
 					<li class="control-group">
 						<label for="description" class="control-label">Description</label>

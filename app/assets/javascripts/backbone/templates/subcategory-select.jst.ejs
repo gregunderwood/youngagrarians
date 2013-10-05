@@ -1,0 +1,11 @@
+<select class='subcategory-select'>
+  <option value='-1'>Select a Sub-Category</option>
+  <% subcategories.each(function(subcategory) { %>
+    <option value='<%= subcategory.id %>'><%= subcategory.get('name') %></option>
+  <% }); %>
+</select>
+<% if (removable) { %>
+<a class='remove-subcategory' href='javascript: void(0);'>
+  <i class='icon-remove'></i>
+</a>
+<% } %>

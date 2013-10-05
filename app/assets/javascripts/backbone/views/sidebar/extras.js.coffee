@@ -9,6 +9,7 @@ class Youngagrarians.Views.Extras extends Backbone.Marionette.ItemView
 
   initialize: (options) =>
     @app = options.app
+    @categories = options.categories
 
   updateLocations: =>
     @app.vent.trigger 'update:locations'
@@ -16,7 +17,9 @@ class Youngagrarians.Views.Extras extends Backbone.Marionette.ItemView
   addLocation: (e) =>
     e.preventDefault()
     newLocation = new Youngagrarians.Models.Location
-    addLoc = new Youngagrarians.Views.AddLocation model: newLocation
+    addLoc = new Youngagrarians.Views.AddLocation 
+      model: newLocation
+      categories: @categories
     addLoc.render()
 
   showAbout: (e) =>

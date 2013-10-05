@@ -10,9 +10,9 @@
 
 font-family: 'Young Agrarians legible';
 
-        src: url('fonts/YOUNG_AGRARIANS.eot');
+        src: url('/fonts/YOUNG_AGRARIANS.eot');
 
-        src: local(''), url('/fonts/YOUNG_AGRARIANS.woff') format('woff'), url('/fonts/YOUNG_AGRARIANS.ttf') format('truetype'), url('fonts/YOUNG_AGRARIANS.svg') format('svg');
+        src: local(''), url('/fonts/YOUNG_AGRARIANS.woff') format('woff'), url('/fonts/YOUNG_AGRARIANS.ttf') format('truetype'), url('/fonts/YOUNG_AGRARIANS.svg') format('svg');
 }
 
 *{
@@ -72,13 +72,13 @@ a:active, a:hover, .widget a:hover {
     }
     
     div.search-field-container {
-      width: 80%;
+      width: 185px;
     }
     
     a#map-search-clear {
       position: absolute;
-      top: 44px;
-      left: 135px;
+      top: 45px;
+      left: 170px;
       cursor: pointer;
     }
     
@@ -90,7 +90,6 @@ a:active, a:hover, .widget a:hover {
   }
   
   #map-selected-categories {
-    margin-top: 12px;
     
     ul {
       
@@ -180,15 +179,12 @@ a:active, a:hover, .widget a:hover {
          
       }
       
-      .subcategory-selects {
-         width: 300px;
+      #subcategory-selects {
          
-         i.icon-remove:first {
-           display: none;  
-         }
-         
+         width: 300px;          
+          
          .subcategory-select {
-           width: 285px;
+           width: 275px;
          }
        }
       
@@ -201,6 +197,9 @@ a:active, a:hover, .widget a:hover {
         color: #2ba6cb; 
       } 
       
+      #subcategories-control-group, #subdivision-control-group, #bioregion-control-group { 
+        display:none;
+      }            
        
       .show-until-control {
         width: 340px;
