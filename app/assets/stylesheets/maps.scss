@@ -12,13 +12,24 @@ font-family: 'Young Agrarians legible';
 
         src: url('/fonts/YOUNG_AGRARIANS.eot');
 
-        src: local(''), url('/fonts/YOUNG_AGRARIANS.woff') format('woff'), url('/fonts/YOUNG_AGRARIANS.ttf') format('truetype'), url('/fonts/YOUNG_AGRARIANS.svg') format('svg');
+        src: local('YOUNG_AGRARIANS'), url('/fonts/YOUNG_AGRARIANS.woff') format('woff'), url('/fonts/YOUNG_AGRARIANS.ttf') format('truetype'), url('/fonts/YOUNG_AGRARIANS.svg') format('svg');
 }
 
 *{
 
 -webkit-font-smoothing: antialiased;
 
+}
+
+select {
+  max-width: 100%;
+  background-color: rgb(227,227,227) !important;
+  color: #FFF;
+  font: 400 normal 14px 'Averia Serif Libre' !important;
+  border: 1px solid #999;
+  height: 30px;
+  margin-bottom: 5px;
+  margin-right: 10px;
 }
 
 a:active, a:hover, .widget a:hover {
@@ -165,7 +176,7 @@ a:active, a:hover, .widget a:hover {
          }
 
          select {
-            width: 340px;
+            width: 330px;
          }
          
          input#location {
@@ -184,7 +195,11 @@ a:active, a:hover, .widget a:hover {
          width: 300px;          
           
          .subcategory-select {
-           width: 275px;
+           width: 270px;
+         }
+         
+         a.remove-subcategory {
+           vertical-align: text-top;
          }
        }
       
