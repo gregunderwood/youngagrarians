@@ -107,6 +107,8 @@ a:active, a:hover, .widget a:hover {
   
   #map-selected-categories {
     
+    padding-top: 5px;
+    
     ul {
       
       margin-bottom: 0;
@@ -128,7 +130,7 @@ a:active, a:hover, .widget a:hover {
   }
   
   .selected-categories-container {
-        
+       
     ul {
       font-size: 11px;
       color: white;
@@ -152,6 +154,8 @@ a:active, a:hover, .widget a:hover {
       img {
         display: inline-block;
         margin-right: 5px;
+        max-width: 64px;
+        max-height: 64px;
       }
       p.location-description {
         margin: 0;
