@@ -162,9 +162,16 @@ class LocationsController < ApplicationController
   # POST /locations.json
   def create
     @location = Location.new(params[:location])
+    @location.save    
     @hide_map = true
+    if params[:subcategories] 
+      params[:subcategories].uniq.each do |subcategory|        
+        s = Subcategory.where(id: subcategory[:id]).first
+        @location.subcategories << s if s
+      end
+    end
     respond_to do |format|
-      if @location.save
+      if @location.valid?
         format.html { redirect_to @location, :notice => 'Location was successfully created.' }
         format.json { render :json =>  @location, :status => :created, :location => @location }
       else
@@ -184,7 +191,7 @@ class LocationsController < ApplicationController
       location = Location.find(params[:id])
       @locations = [ location ]
       location_params = params.clone
-      [:created_at, :id, :updated_at, :category, :subcategory, :markerVisible, :action, :controller, :location].each do |param|
+      [:created_at, :id, :updated_at, :category, :subcategories, :markerVisible, :action, :controller, :location].each do |param|
         location_params.delete param
       end
       location.update_attributes location_params

@@ -29,6 +29,7 @@ class Youngagrarians.Views.Sidebar extends Backbone.Marionette.Layout
     @extrasView = new Youngagrarians.Views.Extras 
       app: @app
       categories: @data.categories
+      locations: @data.locations
     @selectedCategoriesView = new Youngagrarians.Views.SelectedCategories
       app: @app
       collection: options.results.selectedCategories

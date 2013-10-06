@@ -11,7 +11,8 @@ class Youngagrarians.Views.AddLocation extends Backbone.Marionette.View
 
   initialize: (options) =>    
     _.bindAll @, 'render', 'cancelAdd', 'submitForm'
-    @categories = options.categories    
+    @categories = options.categories
+    @locations = options.locations    
     
   renderCategories: =>    
     $categoryEl = @$('select#category-select')
@@ -90,38 +91,51 @@ class Youngagrarians.Views.AddLocation extends Backbone.Marionette.View
 
     agree = @$el.find("input#agree")
     if agree.is(":checked")
-      location = $("input#location").val()
+      location = $("input#location").val()      
       @model.set 'address', location
+      
+      #@model.set 'latitude', $.goMap.getMap().center.lat
+      #@model.set 'longitude', $.goMap.getMap().center.lng
 
-      @model.set 'latitude', $.goMap.getMap().center.lat
-      @model.set 'longitude', $.goMap.getMap().center.lng
-
-      category = window.Categories.get $("select#category").val()
-      @model.set 'category_id', @$el.find("select#category").val()
-      @model.set 'category', category
-
+      categoryId = parseInt $("select#category-select").val()      
+      if not _.isNaN(categoryId) and categoryId != -1 
+        category = @categories.get categoryId
+        @model.set 
+          category_id: categoryId
+          category: category
+      else
+        alert 'You must add a category'
+        return     
+      
       subcategories = new Youngagrarians.Collections.SubcategoryCollection
-      subcatId = $("select#subcategory").val()
-      if !_.isNull subcatId
-        _(subcatId).each (id) =>
-          s = window.Subcategories.get id
-          subcategories.add s
-
-      @model.set 'subcategory', subcategories
-
-      @model.set 'postal', @$el.find('input#postal').val()
-      @model.set 'bioregion', @$el.find('input#bioregion').val()
-      @model.set 'name', @$el.find("input#name").val()
-      @model.set 'description', @$el.find('textarea#description').val()
-      @model.set 'fb_url', @$el.find('input#facebook').val()
-      @model.set 'twitter_url', @$el.find('input#twitter').val()
-      @model.set 'url', @$el.find('input#url').val()
-      @model.set 'phone', @$el.find('input#phone').val()
-      @model.set 'email', @$el.find("input#email").val()
-      @model.set 'show_until', @$el.find("input#show_until").val()
-
-      window.Locations.create @model, wait: true
-
+      _(@$("select.subcategory-select")).each (subcategoryEl)=>
+        $subcategoryEl = $(subcategoryEl)
+        subcategoryId = parseInt $subcategoryEl.val() 
+        if not _.isNaN(subcategoryId) and subcategoryId != -1
+          subcategories.add category.get('subcategories').get subcategoryId
+      @model.set 'subcategories', subcategories
+      
+      if parseInt(@$('#country').val()) != -1
+        @model.set 'country_code', @$('#country').val()
+      else
+        alert 'Please enter a country'
+        return
+      
+      @model.set 'province_code', @$('#subdivision').val() unless parseInt(@$('#subdivision').val()) == -1      
+       
+      @model.set 
+        postal: @$el.find('input#postal').val()        
+        bioregion: @$('#bioregion').val()
+        name: @$("input#name").val()
+        description: @$('textarea#description').val()
+        fb_url: @$('input#facebook').val()
+        twitter_url: @$('input#twitter').val()
+        url: @$('input#url').val()
+        phone: @$('input#phone').val()
+        email: @$("input#email").val()
+        show_until: @$("input#show_until").val()
+        
+      @locations.create @model, wait: true
       @cancelAdd(e)
     else
       alert "You have to agree to the terms!"
