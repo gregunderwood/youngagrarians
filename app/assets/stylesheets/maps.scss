@@ -88,14 +88,19 @@ a:active, a:hover, .widget a:hover {
     
     a#map-search-clear {
       position: absolute;
-      top: 45px;
+      top: 41px;
       left: 170px;
       cursor: pointer;
     }
     
-    #search-button {
-      i {
-        margin: 0 -15px;
+    #search-button-container {
+      
+      vertical-align: top;
+      
+      #search-button {
+        i {
+          margin: 0 -15px;
+        }
       }
     }
   }
