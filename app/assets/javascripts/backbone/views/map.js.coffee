@@ -4,13 +4,13 @@ class Youngagrarians.Views.Map extends Backbone.Marionette.CompositeView
   map: null
 
   collectionEvents:
-    'reset' : 'addMarkers'
+    'reset' : 'updateMap'
 
   initialize: (options) =>
-    @app = options.app
-    @collection.on 'reset', @updateMap
+    @app = options.app    
 
   updateMap: =>
+    debugger
     window.infoBubble.close() if window.infoBubble
     $.goMap.clearMarkers()
     markers = new Backbone.Collection()        
@@ -36,32 +36,13 @@ class Youngagrarians.Views.Map extends Backbone.Marionette.CompositeView
         @map.setZoom 10 if @map.getZoom() > 10
       else
         @map.fitBounds(Youngagrarians.Constants.DEFAULT_BOUNDS())
-
-  addMarkers: (col) =>
-    _.defer =>
-      @children.each ( child ) =>
+    _.defer =>     
+      @children.each (child) =>
         marker = child.createMarker()
 
   onShow: () =>
     @show = []
-    map_style = [{
-      stylers: [
-        { saturation: -100 }
-        { lightness: 16 }
-      ]
-    },{
-      featureType: "road.arterial"
-      stylers: [
-        { lightness: -6 }
-      ]
-    },{
-      featureType: "road.local"
-      elementType: "geometry.stroke"
-      stylers: [
-        { lightness: 15 }
-      ]
-    }]
-    @map = $("#map").goMap
+    @$("#map").goMap
       latitude: 54.826008
       longitude: -125.200195
       zoom: 5
@@ -69,40 +50,4 @@ class Youngagrarians.Views.Map extends Backbone.Marionette.CompositeView
       scrollwheel: false
     
     @map = $.goMap.getMap() 
-    #@map.setOptions 
-    #  styles: map_style
-      
-    $.goMap.createListener(
-      'map'
-      'zoom_changed'
-      (event) =>
-        data =
-          province: @province
-          category: @category
-          subcategory: @subcategory
-          bioregion: @bioregion
-          event: event
-        @collection.trigger 'map:update', {type: 'zoom', data: data}
-        true
-    )
-
-    $.goMap.createListener(
-      'map'
-      'dragend'
-      (event) =>
-        data =
-          province: @province
-          category: @category
-          subcategory: @subcategory
-          bioregion: @bioregion
-          event: event
-        @collection.trigger 'map:update', {type: 'dragend', data: data }
-        true
-    )
-
-    if @collection.length
-      _(@children).each (child) ->
-        marker = child.createMarker()
-        marker.setVisible false
-    true
 

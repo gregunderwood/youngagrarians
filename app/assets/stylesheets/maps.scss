@@ -75,6 +75,10 @@ a:active, a:hover, .widget a:hover {
     }
   }
   
+  #search-form-container {
+    min-width: 220px;
+  }
+  
   #map-search {
     height: 24px;
     
@@ -84,6 +88,7 @@ a:active, a:hover, .widget a:hover {
     
     div.search-field-container {
       width: 185px;
+      min-width: 185px;
     }
     
     a#map-search-clear {
