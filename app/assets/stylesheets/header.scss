@@ -3,7 +3,6 @@
 .site-header{ 
   margin-top:5px;
 }
-
 .site-header .home-link {
   max-width:none;
   padding:0 0px;
@@ -19,32 +18,79 @@
 
 .logo{
   float:left;
-  height:129px;
+    height:129px;
   width:270px;
 }
-
 .logo a.home-link{
   background:url('http://youngagrarians.org/~youngagr/wp-content/themes/youngagrarians/img/young-agrarians-logo-bw.jpg') 0px 0 no-repeat;
   height:129px;
   width:270px;
-}
-
-.logo a:hover.home-link{
-  background-position: 0px -132px;
-}
-
-.site-header .home-link {
-  color: #141412;
   display: block;
-  margin: 0 auto;
-  max-width: 1080px;
-  min-height: 230px;
-  padding: 0 20px;
-  text-decoration: none;
-  width: 100%;
 }
-.site-header .home-link {
-    min-height: 0;
+.logo a:hover.home-link{
+  background-position: 0px -138px;
+}
+.top-buttons{
+  margin-left:auto;
+  margin-right:auto;
+  width:700px;
+
+  padding-left:140px;
+}
+
+.u-map, .sign-up, .donate{
+  float:left;
+  text-align:center;
+  text-transform:uppercase;
+  margin-left:50px;
+
+}
+
+
+a.u-map{
+  background:url('http://youngagrarians.org/~youngagr/wp-content/themes/youngagrarians/img/u-map.jpg') 10px 0 no-repeat;
+  height:95px;
+  width:125px;
+}
+a.sign-up{
+  background:url('http://youngagrarians.org/~youngagr/wp-content/themes/youngagrarians/img/sign-up.jpg') 0px 0 no-repeat;
+  height:95px;
+  width:120px;
+}
+a.donate{
+  background:url('http://youngagrarians.org/~youngagr/wp-content/themes/youngagrarians/img/donate.jpg') 10px 0 no-repeat;
+  height:95px;
+  width:100px;
+}
+.top-buttons a:hover.u-map{
+  background-position: 10px -95px;
+}
+.top-buttons a:hover.sign-up{
+  background-position: 0px -95px;
+}
+.top-buttons a:hover.donate{
+  background-position: 10px -95px;
+}
+
+.top-buttons a p{
+  padding-top:95px;
+  text-transform:normal;
+  font-size:20px;
+  font-family: 'YoungAgrariansBoldBold';
+  font-weight:bold;
+  margin-bottom:0px;
+  margin-top:3px;
+  color:#000;
+  line-height:15px;
+
+
+
+}
+.top-buttons a p span.sub{
+  font-size:13px;
+  margin-top:-10px;
+  font-family: 'YoungAgrariansBoldDarkBoldDark', cursive;
+
 }
 
 ul.social {
@@ -109,10 +155,13 @@ padding:0px;
   background-position: 43px 45px;
 }
 
+
+
 .search-bar{
   float:right;
   margin-top:5px;
 }
+
 .search-bar input{
   float:left;
   border:none;
@@ -130,67 +179,6 @@ border-radius: 5px;
   position:relative;
   top:0px;
   right:0px;
-}
-
-.top-buttons{
-  margin-left:auto;
-  margin-right:auto;
-  width:700px;
-
-  padding-left:140px;
-}
-
-.u-map, .sign-up, .donate{
-  float:left;
-  text-align:center;
-  text-transform:uppercase;
-  margin-left:50px;
-
-}
-
-a.u-map{
-  background:url('http://youngagrarians.org/~youngagr/wp-content/themes/youngagrarians/img/u-map.jpg') 10px 0 no-repeat;
-  height:95px;
-  width:125px;
-}
-a.sign-up{
-  background:url('http://youngagrarians.org/~youngagr/wp-content/themes/youngagrarians/img/sign-up.jpg') 0px 0 no-repeat;
-  height:95px;
-  width:120px;
-}
-a.donate{
-  background:url('http://youngagrarians.org/~youngagr/wp-content/themes/youngagrarians/img/donate.jpg') 10px 0 no-repeat;
-  height:95px;
-  width:100px;
-}
-
-.top-buttons a:hover.u-map{
-  background-position: 10px -95px;
-}
-.top-buttons a:hover.sign-up{
-  background-position: 0px -95px;
-}
-.top-buttons a:hover.donate{
-  background-position: 10px -95px;
-}
-
-.top-buttons a p{
-  padding-top:95px;
-  text-transform:normal;
-  font-size:20px;
-  font-family: 'Young Agrarians legible';
-  font-weight:bold;
-  margin-bottom:0px;
-  margin-top:3px;
-  color:#000;
-  line-height:15px;
-}
-
-.top-buttons a p span.sub{
-  font-size:10px;
-  margin-top:-10px;
-  font-family: 'Averia Serif Libre', cursive;
-
 }
 
 /**
