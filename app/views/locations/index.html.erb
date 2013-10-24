@@ -21,6 +21,10 @@
       <button class="btn btn-mini" id="approve-all" type="submit" value="approve">Approve Selected</button>
     </li>
   </ul>
+  <ul id="admin-locations-links" class="unstyled inline">
+    <li><%= link_to 'Import', :excel_import %></li>
+    <li><%= link_to 'Export CSV', '/locations.csv' %></li>
+  </ul>
 	<table class="container">
 		<tr>
 			<th></th>
@@ -65,7 +69,4 @@
 	</table>
 	<% end %>
 
-	<ul id="admin-locations-links" class="unstyled inline">
-		<li><%= link_to 'Import', :excel_import %></li>
-	</ul>
 </div>

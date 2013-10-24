@@ -2,7 +2,9 @@ class LocationsController < ApplicationController
   require 'spreadsheet'
   require 'fileutils'
   require 'iconv'
-
+  
+  before_filter :hide_map
+  
   @tmp = {}
 
   def search    
@@ -29,9 +31,7 @@ class LocationsController < ApplicationController
           @locations = Location.where( :is_approved => 0 ).order(:name).all
         else
           @locations = Location.order(:name).all
-        end
-
-        @hide_map = true
+        end        
       }
       format.json {
         @locations = Location.where( "is_approved = 1 AND ( show_until is null OR show_until > ? )", Date.today ).all
@@ -42,14 +42,16 @@ class LocationsController < ApplicationController
 
         render :json =>  @locations
       }
+      format.csv { 
+        send_data Location.to_csv
+      }
     end
   end
 
   # GET /locations/1
   # GET /locations/1.json
   def show
-    @location = Location.find(params[:id])
-    @hide_map = true
+    @location = Location.find(params[:id])    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render :json =>  @location }
@@ -59,8 +61,7 @@ class LocationsController < ApplicationController
   # GET /locations/new
   # GET /locations/new.json
   def new
-    @location = Location.new
-    @hide_map = true
+    @location = Location.new    
     respond_to do |format|
       format.html # new.html.erb
       format.json { render :json =>  @location }
@@ -69,21 +70,27 @@ class LocationsController < ApplicationController
 
   # custom!
   def excel_import
-    @hide_map = true
-
     if params.has_key? :dump and params[:dump].has_key? :excel_file
       @tmp = params[:dump][:excel_file].tempfile
-
+      
+      @failed_rows = []
+      
       Spreadsheet.client_encoding = 'UTF-8'
       book = Spreadsheet.open @tmp.path
       sheet1 = book.worksheet 0
       sheet1.each_with_index do |row, i|
-        # skip the first row dummy
+        
+        # skip the first row
         next if i == 0
         if ( row[3].nil? or row[3].empty? ) and ( row[5].nil? or row[5].empty? ) and
             ( row[4].nil? or row[4].empty? ) and ( row[1].nil? or row[1].empty? )
           break
         end
+        
+        # strip whitespace from all fields        
+        new_row = []
+        row.each_with_index { |value, index| new_row[index] = value.strip if value }
+        row = new_row
 
         cat = nil
         if not row[1].nil? and not row[1].empty?
@@ -136,16 +143,19 @@ class LocationsController < ApplicationController
           l.subcategories = subcats
         end
 
-        l.save
+        if l.save
+          
+        else
+          @failed_rows << "Failed to write location: #{l.name} - #{l.errors.messages}"
+        end
       end
-      redirect_to :locations
+      @message = "Imported locations"      
     end
   end
 
   # GET /locations/1/edit
   def edit
     @categories = Category.all
-    # @subcategories = @location.category.
     @locations = nil
     @hide_map = true
     if params.has_key? :id
@@ -254,6 +264,13 @@ class LocationsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private 
+  
+  def hide_map
+    @hide_map = true
+  end
+  
 end
 
 # WAT
