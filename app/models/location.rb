@@ -1,6 +1,6 @@
 class Location < ActiveRecord::Base
   include Gmaps4rails::ActsAsGmappable
-  acts_as_gmappable :process_geocoding => :process
+  acts_as_gmappable :process_geocoding => :process, :validation => false
 
   belongs_to :category
   has_and_belongs_to_many :subcategories
@@ -13,10 +13,7 @@ class Location < ActiveRecord::Base
     "#{address}"
   end
 
-  def process
-    if address.nil? || address.empty?
-      return false
-    end
+  def process    
     true
   end
 

@@ -125,7 +125,8 @@ class LocationsController < ApplicationController
                          :email => row[11] ||= '',
                          :province_code => row[12],
                          :country_code => row[13],
-                         :is_approved => 1 )
+                         :is_approved => 1,
+                         :gmaps => true)
         if not cat.nil?
           l.category_id = cat.id
         end
