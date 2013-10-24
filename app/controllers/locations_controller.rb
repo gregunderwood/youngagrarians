@@ -111,16 +111,7 @@ class LocationsController < ApplicationController
         end
 
         address = row[5] || ''
-        newaddress = nil
-        if not address.match(/^[Bb][Oo][Xx]/).nil? or not address.match(/^[Pp][Oo] [Bb][Oo][Xx]/).nil?
-          newaddress = address.match(/[A-Z-z][0-9][A-Za-z] [0-9][A-Za-z][0-9]/)
-          if newaddress.nil?
-            newaddress = address.match(/[0-9]{5}/)
-          end
-        end
-        if not newaddress.nil?
-          address = newaddress[0]
-        end
+        
         
         l = Location.new(:resource_type => row[0] ||= '',
                          :name => row[3] ||= '',
