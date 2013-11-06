@@ -34,4 +34,7 @@ Youngagrarians::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+  
+  config.api_host = "http://localhost:3000"
+  
 end

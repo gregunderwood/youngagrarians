@@ -13,4 +13,4 @@ Youngagrarians.Models.Subcategory.setup()
 
 class Youngagrarians.Collections.SubcategoryCollection extends Backbone.Collection
   model: Youngagrarians.Models.Subcategory
-  url: '/subcategories'
+  url: "#{YA.host}/subcategories?callback=?"

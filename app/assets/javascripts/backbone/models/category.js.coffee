@@ -27,7 +27,7 @@ Youngagrarians.Models.Category.setup()
 
 class Youngagrarians.Collections.CategoriesCollection extends Backbone.Collection
   model: Youngagrarians.Models.Category
-  url: '/categories'
+  url: "#{YA.host}/categories?callback=?"
 
   comparator: ( a, b ) =>
     aName = a.get('name')
